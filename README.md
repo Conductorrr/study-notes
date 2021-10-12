@@ -1,3 +1,1 @@
 # study-notes
-
-# push？

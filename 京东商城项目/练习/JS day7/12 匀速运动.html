@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            top: 100px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">开始</button>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+    var btn = document.getElementById("btn");
+    var box = document.getElementById("box");
+    var num = 0;
+    var timer = null;
+    btn.onclick = function(){
+        timer = setInterval(function(){
+            num++;
+            if(num>=500){
+                clearInterval(timer);
+            }else{
+                box.style.left = num +"px";
+            }
+        },10)
+        
+    }
+</script>

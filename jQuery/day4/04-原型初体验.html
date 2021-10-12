@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+
+  //jquery插件的实质，就是给jquery的原型上增加方法。
+  //$.fn  ==== jQuery.prototype
+  
+  $.fn.sayHi = function () {
+      console.log("呵呵");
+  }
+
+  $(document).sayHi();
+
+</script>
+
+</body>
+</html>

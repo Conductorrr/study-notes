@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="" id="File"><span></span>  <!--文件域-->
+</body>
+</html>
+<script>
+    var file = document.getElementById("File");
+    file.onchange = function() {
+        var path = this.value;  //得到的是现在的文件路径
+        console.log(path);
+        var suxxif = path.substr(path.lastIndexOf(".")).toUpperCase();
+        if(suxxif == ".JPG" || suxxif == ".PNG")
+        {
+            this.nextSibling.innerHTML = "格式正确";
+        }
+        else
+        {
+            this.nextSibling.innerHTML = "格式错误的";
+        }
+    }
+</script>

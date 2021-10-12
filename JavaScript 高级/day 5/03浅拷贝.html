@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+
+    /* 浅拷贝：将原对象/原数组的引用直接赋给新对象/新数组，新对象/新数组只是原对象/原数组的一个引用 */
+
+
+
+    var obj1={
+      age:10,
+      sex:"男",
+      car:["奔驰","宝马","特斯拉","奥拓"]
+    };
+    //另一个对象
+    var obj2={};
+    
+    //写一个函数,作用:把一个对象的属性复制到另一个对象中,浅拷贝
+    //把a对象中的所有的属性复制到对象b中
+    function extend(a,b) {
+      for(var key in a){
+        b[key]=a[key];
+      }
+    }
+    extend(obj1,obj2);
+    console.dir(obj2);
+    
+  </script>
+</head> 
+<body>
+
+
+</body>
+</html>

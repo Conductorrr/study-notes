@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<img src="http://img.daimg.com/uploads/allimg/160324/1-160324232117.jpg">
+<img src="http://img.daimg.com/uploads/allimg/160318/1-16031P01P0.jpg">
+<img src="http://img.daimg.com/uploads/allimg/160318/1-16031P01332.jpg">
+<img src="http://img.daimg.com/uploads/allimg/160608/1-16060R35630.jpg" alt="">
+<img src="http://img.daimg.com/uploads/allimg/160531/1-160531224303.jpg" alt="">
+
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+  
+  /*js的入口函数执行要比jQuery的入口函数执行得晚一些,因为：
+
+    js的入口函数要等到页面中所有资源（文档树、图片、文件）加载完成才开始执行。（这就是js时不建议写上入口函数的原因，本来<script>
+    放在最后是等文档树加载完成开始执行，加个入口函数还要等图片的加载反而慢了）
+    
+    jq的入口函数等待文档树加载完成就开始执行，并不会等待图片、文件的加载。（这就是jq时建议写上入口函数的原因.<script>放在最后
+    的话加不加入口函数都一样，但如果有入口函数<script>放哪都行了，并且有了一个独立的作用域。）
+
+    document.ready、DOMContentLoaded事件，也和jq一样无需等待图片等。
+        
+  */
+  
+  window.onload = function () {
+    console.log("我是js的入口函数"); 
+  };
+  
+  
+  //认识
+  $(document).ready(function () {
+    console.log("这是jQuery入口函数的第一种写法");
+  });
+  
+  $(function () {
+    console.log("这是jQuery入口函数的第二种写法");
+  });
+  
+</script>
+
+</body>
+</html>

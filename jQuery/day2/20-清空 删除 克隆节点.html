@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+
+<div>
+  <p>1111</p>
+  <p>2222</p>
+</div>
+
+<p class='des'>我是外面的p元素</p>
+
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+  $(function () {
+    
+    
+    $(".des").click(function () {
+      alert("hehe");
+    })
+    
+    //清空一个元素的内容
+    //$("div").html(""); //内存泄露
+    //$("div").empty(); //清理门户
+    
+    //删除节点
+    //$("div").remove();
+    
+    //克隆节点
+    //传不传参数都是深度复制
+    //false:不会复制事件
+    //true:会复制事件
+    $(".des").clone(true).appendTo("div");
+  });
+</script>
+</body>
+</html>

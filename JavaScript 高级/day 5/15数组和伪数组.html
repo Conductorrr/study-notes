@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+
+    /*
+
+    伪数组的定义：
+    1.伪数组是个对象
+    2.必须有length属性，且如果length不为0，那么必须要有按照下标存储的数据
+    像document.getElementsByTagName()、xxx.children返回的都是伪数组，函数的arguments属性也是伪数组对象    
+    
+    伪数组和数组的区别：
+    1.伪数组是Object类型，数组是Array类型
+    2.无法调用数组中的方法(但伪数组可以使用自己的一些方法，如jq对象)
+    3.伪数组和数组都有length属性，但数组的length属性的值会随数组添加/删除元素自动变化，而伪数组的length属性不会
+
+    伪数组转标准数组：
+    1.使用 Array.prototype.slice.call(fakeArray)将伪数组转化为真正的Array对象
+    2.声明一个空数组，通过遍历伪数组把它们重新添加到新的数组中
+
+    */
+
+
+
+  //  function f1() {
+  //    var sum=0;
+  //    for(var i=0;i<arguments.length;i++){
+  //      sum+=arguments[i];
+  //    }
+  //    console.log(sum);
+  //  }
+  //  //arguments得到的是实参的个数及实参的每个值
+  //  f1(10,20,30,40);
+
+
+
+  //  function f1() {
+  //   var sum=0;
+  //    arguments.forEach(function () { // 报错 因为区别2
+  //      
+  //    });
+  //  }
+  //  //arguments得到的是实参的个数及实参的每个值
+  //  f1(10,20,30,40);
+
+  //  var arr=[10,20,30];
+  //  arr.forEach(function () {
+  //    
+  //  });
+
+
+
+  // var arr=[10,20];
+  // //arr.forEach()
+  // console.dir(arr);
+  // //数组实例对象的__proto__----->Array的prototype
+
+
+
+  //  //数组
+  //  var arr=[10,20,30];
+
+  //  console.log(arr.length);
+  //  arr[3]=100;
+  //  console.log(arr.length);
+
+  //  for(var i=0;i<arr.length;i++){
+  //    console.log(arr[i]);
+  //  }
+
+  //  //自已定义一个伪数组
+  //  var obj={
+  //    0:10,
+  //    1:20,
+  //    2:30,
+  //    length:3
+  //  };
+
+  //  console.log(obj.length); // 3
+  //  obj[3]=1000;
+  //  console.log(obj[3]);
+  //  console.log(obj.length); // 还是3 因为区别3
+
+  //  for(var i=0;i<obj.length;i++){
+  //    console.log(obj[i]);
+  //  }
+  </script>
+</head>
+<body>
+
+
+</body>
+</html>

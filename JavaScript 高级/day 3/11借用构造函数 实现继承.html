@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+    // function Person(name,age,sex,weight) {
+    //   this.name=name;
+    //   this.age=age;
+    //   this.sex=sex;
+    //   this.weight=weight;
+    // }
+    // Person.prototype.sayHi=function () {
+    //   console.log("您好");
+    // };
+
+    // function Student(score) {
+    //   this.score=score;
+    // }
+    // Student.prototype=new Person("小明",10,"男","50kg");//继承--希望人的类别中的数据可以共享给学生
+
+    // var stu1=new Student("100");
+    // console.log(stu1.name,stu1.age,stu1.sex,stu1.weight,stu1.score);
+    // stu1.sayHi();
+
+    // var stu2=new Student("120");
+    // console.log(stu2.name,stu2.age,stu2.sex,stu2.weight,stu2.score);//问题：直接初始化了属性，继承过来的属性的值都是一样的了,所以,这就是问题
+    // stu2.name="张三";//只能重新调用对象的属性进行重新赋值（这样相当于在stu2上添加属性，实例上有属性就不会去原型上找了）
+    // stu2.age=20;
+    // stu2.sex="女";
+    // console.log(stu2.name,stu2.age,stu2.sex,stu2.weight,stu2.score);
+    // stu2.sayHi();
+
+    // 原型链实现继承的问题：1、直接初始化了属性，继承过来的属性的值都是一样的了         （问题2、见书）
+    // 只能重新调用对象的属性进行重新赋值（很麻烦，所以👇）        
+
+
+
+    // 解决方案：借用构造函数：在子类型构造函数的内部调用超类构造函数   (相当于把超类构造函数中的东西都复制到子类构造函数中去)
+    // 解决了属性继承,并且值不重复的问题
+    // 缺陷：父级类别中的方法不能继承(原型中的方法)
+
+    function Person(name, age, sex, weight) {
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+      this.weight = weight;
+    }
+    Person.prototype.sayHi = function () {
+      console.log("您好");
+    };
+
+    function Student(name,age,sex,weight,score) {
+      // 借用构造函数     构造函数名字.call(当前对象,属性,属性,属性....)
+      Person.call(this,name,age,sex,weight);
+      this.score = score;
+    }
+
+    var stu1 = new Student("小明",10,"男","10kg","100");
+    console.log(stu1.name, stu1.age, stu1.sex, stu1.weight, stu1.score);
+  </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

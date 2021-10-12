@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+    
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+      this.sayHi = function () {
+        console.log("您好");
+      };
+    }
+    //创建对象---->实例化一个对象的同时对属性进行初始化
+    var per = new Person("小红", 20);
+    console.log(per.name)
+
+    /*
+     * 要创建Person的新实例，必须使用new操作符。以这种方式调用构造函数实际上会经历以下 4 个步骤：
+     *
+     * 1.创建一个新对象
+     * 2.为新对象执行原型操作，指向构造函数的原型     （让新对象的_proto_指向构造函数的原型）
+     * 3.让构造函数的this指向这个新对象，并执行构造函数中的代码(为新对象添加属性和方法)
+     * 4.返回新对象
+     *
+     * */
+
+
+    //自己实现new
+    function New(P) {
+      var o = {}
+      o.__proto__ = P.prototype
+      var args = Array.prototype.slice.call(arguments, 1)
+      P.apply(o, args)
+      return o;
+    }
+    var per2 = New(Person, '小王', 30)
+    console.log(per2.name)
+
+
+  </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

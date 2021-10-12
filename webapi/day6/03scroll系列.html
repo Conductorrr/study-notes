@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    div{
+      width: 300px;
+      height: 200px;
+      border: 2px solid red;
+      overflow: scroll;
+    }
+    input{
+      left: 330px;
+      position: absolute;
+      top:20px;
+
+    }
+  </style>
+</head>
+<body>
+  
+<div id="dv">
+  我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人我喜欢男人嘿嘿,小苏说
+</div>
+<input type="button" value="显示效果" id="btn"/>
+
+<script src="common.js"></script>
+
+<script>
+
+  /*
+  *
+  * scroll系列:卷曲---滚出去
+  * scrollWidth:元素中内容的实际的宽(没有边框),如果没有内容或内容不足元素的宽 就是元素的宽
+  * scrollHeight:元素中内容的实际的高(没有边框),如果没有内容或内容不足元素的高 就是元素的高
+  * scrollTop:元素向上卷曲出去的距离
+  * scrollLeft:元素向左卷曲出去的距离
+  * 
+  */
+
+
+  // my$("btn").onclick=function () {
+  // console.log(my$("dv").scrollWidth);//元素中内容的实际的宽
+  // console.log(my$("dv").scrollHeight);//元素中内容的实际的高
+  // console.log(my$("dv").scrollTop);//向上卷曲出去的距离
+  // console.log(my$("dv").scrollLeft);//向左卷曲出去的距离
+  // };
+
+  //时时的获取向上卷曲出去的距离的值
+  //div的滚动事件
+  my$("dv").onscroll=function () {
+    console.log(this.scrollTop);
+  };
+
+</script>
+
+</body>
+</html>

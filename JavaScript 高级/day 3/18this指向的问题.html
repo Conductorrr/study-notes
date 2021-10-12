@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+
+    /*
+     *
+     * 函数中的this的指向：
+     *
+     *
+     * 普通函数简单调用 this是谁?-----window
+     * 定时器方法中的this是谁?----window（setInterval和setTimeout的回调函数中this的指向都是window，这是因为JS的定时器方法是定义在window下的
+     *
+     * 对象.方法中的this是谁?----当前的实例对象
+     * 构造函数中的this是谁?-----实例对象
+     * 原型对象方法中的this是谁?---实例对象
+     *
+     *（静态方法中的this就是这个类，返回这段代码）
+     *
+     * 定时器回掉函数中的this、数组filter等方法回掉函数中的this，都是指向window的（无论定时器在哪个对象哪个函数中使用）（收藏，es6）
+     * 
+     */
+
+
+
+    //严格模式:
+    //  "use strict";//严格模式
+    //  function f1() {
+    //    console.log(this);
+    //  }
+    //  windod.f1();
+
+    //普通函数
+    //    function f1() {
+    //      console.log(this);//window
+    //    }
+    //   f1();
+
+    //定时器中的this
+    //  setInterval(function () {
+    //    console.log(this);//window
+    //  },1000);
+
+    //构造函数
+    //    function Person() {
+    //      console.log(this);
+    //对象的方法
+    //      this.sayHi=function () {
+    //        console.log(this);
+    //      };
+    //    }
+    //原型中的方法
+    //    Person.prototype.eat=function () {
+    //      console.log(this);
+    //    };
+    //    var per=new Person();
+    //    console.log(per);
+    //    per.sayHi();
+    //    per.eat();
+
+
+    //BOM:中顶级对象是window,浏览器中所有的东西都是window的
+
+
+  </script>
+</head>
+<body>
+
+
+</body>
+</html>

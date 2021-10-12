@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            function getClass(classname,id){
+                //如果浏览器支持
+                if(document.getElementsByClassName){
+                    if(id){//如果有id
+                        var eleId = document.getElementById(id);
+                        return eleId.getElementsByClassName(classname);
+                    }
+                    else{//如果没有id
+                        return document.getElementsByClassName(classname);
+                    }
+                    
+                }
+
+                //不支持的浏览器
+                if(id){//如果有id
+                    var eleId = document.getElementById(id);
+                    var dom = eleId.getElementsByTagName("*");
+                }
+                else{//如果没有id
+                    var dom = document.getElementsByTagName("*");
+                }
+                var arr = [];//用于存放满足的元素的数组
+                for(var i=0;i<dom.length;i++){
+                    var txtarr = dom[i].className.split(" ");//字符串转数组，以空格分割
+                    for(var j;j<txtarr.length;j++){
+                        if(txtarr[j]==classname){
+                            arr.push(dpm[i]);
+                        }
+                    }
+                }
+                return arr;
+
+            }
+            alert(getClass("test","one").length); //id为one下的，类名为test的元素
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div class="demo "></div>
+    <div class="demo test"></div>
+    <div></div>
+    <div></div>
+    <div id="one">
+        <div class="demo test index"></div>
+        <div></div>
+        <div class="demo test"></div>
+        <div></div>
+    </div>
+    <div></div>
+    <div></div>
+</body>
+</html>

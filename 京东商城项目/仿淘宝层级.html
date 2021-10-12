@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+       /* 1. 如果都是标准流或者有浮动：
+       .test {
+            width: 150px;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin-top: 100px;
+            float: left;
+            margin-left: -1px;
+        }
+        .test:hover {  鼠标一放上去变成相对定位 (利用定位比标准流、浮动层高)
+            border: 1px solid #f40;
+            position: relative;  （不能用绝对定位，因为绝对定位不占位置，其他盒子会挤上来。相对定位占有位置不影响其他盒子）
+        } */
+
+        /* 2. 已经有相对定位了： */
+        .test {
+            width: 150px;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin-top: 100px;
+            float: left;
+            margin-left: -1px;
+            position: relative;  
+        }
+        .test:hover {
+            border: 1px solid #f40;
+            z-index: 1;  /*鼠标放上去层级变高*/
+        }
+    </style>
+</head>
+<body>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+</body>
+</html>

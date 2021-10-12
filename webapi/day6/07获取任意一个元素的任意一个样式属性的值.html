@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    div{
+      width: 200px;
+      height: 100px;
+      background-color: purple;
+      left:100px;
+      top:0;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="显示效果" id="btn"/>
+<div id="dv"></div>
+<script src="common.js"></script>
+<script>
+//  my$("btn").onclick=function () {
+//    //获取元素距离左边位置的值
+//    //console.log(my$("dv").offsetLeft);//废了，因为如果dv没脱标，只设了left:100;(left确实设值了，position只是能让我们看得出效果)这里也是0，并不能获取到真的值
+//
+//    //谷歌,火狐支持
+//    //console.log(window.getComputedStyle(my$("dv"),null).left); //空参数，显示CSS的所有属性
+//    //console.log(window.getComputedStyle(my$("dv"),null)["left"]);
+
+//    //IE8支持
+//    //console.log(my$("dv").currentStyle.left);
+//  };
+
+
+  //获取任意一个元素的任意一个样式属性的值
+  function getAttrValue(element,attr) {
+   return window.getComputedStyle? window.getComputedStyle(element,null)[attr]:element.currentStyle[attr];
+  }
+
+  my$("btn").onclick=function () {
+    console.log(getAttrValue(my$("dv"),"left"));//如果获取top有的浏览器会出来auto,有的会出来0,出来auto的要设置top:0;
+  };
+
+</script>
+</body>
+</html>

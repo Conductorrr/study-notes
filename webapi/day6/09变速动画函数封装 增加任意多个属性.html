@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      margin-top: 20px;
+      width: 200px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="移动到400px" id="btn1"/>
+<div id="dv">
+  <script src="common.js"></script>
+  <script>
+
+    function getAttrValue(element,attr) {
+      return window.getComputedStyle? window.getComputedStyle(element,null)[attr]:element.currentStyle[attr];
+    }
+
+    //改变元素的多个属性，让它们都到达目标位置。     改变宽度到达目标位置,高度到达目标位置,...等
+    function animate(element,json) {
+      clearInterval(element.timeId);
+      element.timeId = setInterval(function () {
+        var flag = true;//默认,假设,全部到达目标
+        for(var attr in json){
+          var current = parseInt(getAttrValue(element,attr));
+          var target = json[attr];
+          var step = (target-current)/10; 
+          step = step>0?Math.ceil(step):Math.floor(step);
+          current += step;
+          element.style[attr] = current + "px";
+          if(current!=target) {
+            flag=false;
+          }
+          console.log("目标位置:"+target+",当前位置:"+current+",每次移动步数:"+step); //测试代码: 
+        }
+        if(flag){
+          clearInterval(element.timeId);
+        }
+      }, 20);
+    }
+
+    my$("btn1").onclick = function () {
+      animate(my$("dv"),{"width":400,"height":500,"left":400,"top":80});
+    };
+  </script>
+</div>
+</body>
+</html>

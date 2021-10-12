@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            height: 50px;
+            width: 50px;
+            margin: 20px;
+            background-color: pink;
+            display: none;
+        }
+    </style>
+    <script>
+        function fn(obj){
+            var target = document.getElementById(obj);
+            target.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <button onclick="fn('demo1')">按钮1</button>
+    <button onclick="fn('demo2')">按钮2</button>
+    <button onclick="fn('demo3')">按钮3</button>
+    <button onclick="fn('demo4')">按钮4</button>
+    <div id="demo1"></div>
+    <div id="demo2"></div>
+    <div id="demo3"></div>
+    <div id="demo4"></div>
+</body>
+</html>

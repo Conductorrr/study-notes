@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      height: 2000px;
+    }
+    img{
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+<img src="images/bird.png" alt="" id="im" />
+<script src="common.js"></script>
+<script>
+
+  document.onmousemove=function () {
+    function getScroll() {
+      return {
+        left:window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft||0,
+        top:window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop||0
+      }
+    }
+    //可视区域横坐+向左卷曲出去的横坐标
+    my$("im").style.left=window.event.clientX+getScroll().left+"px";
+    //可视区域纵坐标+向上卷曲出去的纵坐标
+    my$("im").style.top=window.event.clientY+getScroll().top+"px";
+
+  };
+
+</script>
+
+</body>
+</html>

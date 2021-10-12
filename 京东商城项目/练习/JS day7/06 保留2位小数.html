@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var PI = 1213.232323;  //常量大写
+    var str = PI +"";  //因为数字没办法进行字符操作，先转换为字符串
+
+    //法1
+    console.log(str.substr(0,str.indexOf(".")+3));
+    console.log(str.slice(0,str.indexOf(".")+3));
+
+    //法2
+    console.log(parseInt(PI*100)/100);
+
+    //法3
+    console.log(PI.toFixed(2));
+</script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      margin-top: 20px;
+      width: 200px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+<input type="button" value="移动到400px" id="btn1"/>
+<div id="dv">
+  <script src="common.js"></script>
+  <script>
+
+    //回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个回调函数。这个过程就叫做回调。
+
+    function getAttrValue(element,attr) {
+      return window.getComputedStyle? window.getComputedStyle(element,null)[attr]:element.currentStyle[attr];
+    }
+
+    function animate(element,json,fn) {
+      clearInterval(element.timeId);
+      element.timeId = setInterval(function () {
+        var flag = true;
+        for(var attr in json){
+          var current = parseInt(getAttrValue(element,attr));
+          var target = json[attr];
+          var step = (target-current)/10; 
+          step = step>0?Math.ceil(step):Math.floor(step);
+          current += step;
+          element.style[attr] = current + "px";
+          if(current!=target) {
+            flag=false;
+          }
+          console.log("目标位置:"+target+",当前位置:"+current+",每次移动步数:"+step); //测试代码: 
+        }
+        if(flag){
+          clearInterval(element.timeId);
+          //因为所有的属性到达目标之后才能使用回掉函数，所以放在这个地方
+          if(fn){//可能没有传入这个参数的，所有要先判断
+            fn();
+          }
+        }
+      }, 20);
+    }
+
+    //回掉函数的使用
+    my$("btn1").onclick = function () {
+      json1 = {"width":400,"height":500,"left":400,"top":80};
+      animate(my$("dv"),json1,function () {
+        json2 = {"width":40,"height":50,"left":50,"top":800};
+        animate(my$("dv"),json2,function () {
+          var json3={"width":450,"height":550,"left":550,"top":600};
+          animate(my$("dv"),json3);
+        });
+      });
+    };
+    
+  </script>
+</div>
+</body>
+</html>

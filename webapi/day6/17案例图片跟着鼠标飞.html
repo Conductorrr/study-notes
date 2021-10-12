@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body{
+      height: 2000px;
+    }
+    img {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<img src="images/tianshi.gif" alt="" id="im">
+<script src="common.js"></script>
+<script>
+
+     //document.onmouseover：页面的鼠标移动事件，因为鼠标是在页面中移动（用document.body不行，因为没有被撑开。document.documentElement能达到效果，但最好还是用document因为鼠标是在页面中移动，且document范围更大是顶级元素
+     //clientX：鼠标在可视区域的横坐标
+     //clientY：鼠标在可视区域的纵坐标
+
+      //谷歌 火狐
+  //  document.onmousemove=function (e) {
+  //    my$("im").style.left=e.clientX+"px";
+  //    my$("im").style.top=e.clientY+"px";
+  //  };
+
+      //ie
+  //  document.onmousemove=function () {
+  //    my$("im").style.left=window.event.clientX+"px";
+  //    my$("im").style.top=window.event.clientY+"px";
+  //  };
+
+      //兼容代码
+  //  document.onmousemove = function (e) {
+  //    e = window.event || e;
+  //    my$("im").style.left = e.clientX + "px";
+  //    my$("im").style.top = e.clientY + "px";
+  //  };
+
+  
+
+  document.onmousemove = function (e) {
+   //pageX：鼠标相对于页面顶部的坐标
+   my$("im").style.left = e.pageX + "px";
+   my$("im").style.top = e.pageY + "px";
+
+   //my$("im").style.left = window.event.pageX + "px";
+   //my$("im").style.top = window.event.pageY + "px";
+   //没效果，因为pageX和pageY在谷歌和火狐可以使用,IE8不能用
+
+  };
+  
+</script>
+</body>
+</html>

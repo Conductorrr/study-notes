@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+
+    //重点掌握这个案例的思想
+
+    var box = document.getElementById("box");
+    var count = 5;
+    setTimeout(goIndexPage,1000);
+    function goIndexPage(){
+        count--;
+        box.innerHTML = "本页面将在第"+count+"秒钟之后跳转页面<a href='http://www.baidu.com'>点击马上跳转</a>";
+        if(count<=0){//如果count小于0就到时间了，应该跳转页面
+            window.location.href = "http://www.baidu.com";  //js页面跳转
+        }else{
+            setTimeout(arguments.callee,1000);  //递归调用
+        }
+    }
+</script>

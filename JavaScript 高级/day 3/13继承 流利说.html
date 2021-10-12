@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+
+
+    function Person(name,age,sex) {
+      this.name=name;
+      this.age=age;
+      this.sex=sex;
+    }
+    Person.prototype.sayHi=function () {
+      console.log("阿涅哈斯诶呦");
+    };
+
+
+    function Student(name,age,sex,score) {
+      Person.call(this,name,age,sex);
+      this.score=score;
+    }
+    Student.prototype.eat=function () {
+      console.log("吃东西");
+    };
+    //如果用之前原型链的方式实现继承，那eat就没了，怎么办？
+    //答：用遍历+[key]的方式
+    //但是，一般都是先原型链继承后再添加自己的方法的，所以这个问题问的没意思啊。。。
+    for(var key in Person.prototype){
+      Student.prototype[key]=Person.prototype[key]
+    }
+
+    var stu=new Student("小黑",20,"男","100分");
+    console.log(stu.name,stu.age,stu.sex,stu.score);
+    stu.sayHi();
+    stu.eat();
+    console.dir(stu)
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

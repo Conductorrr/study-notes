@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+
+    //页面中的所有加载完毕,这个事件就会触发-----页面中所有的内容,标签,属性,文本,图片,包括外部引入js文件
+    //（建议所有<script>还是直接写在最后并且不带window.onload，因为<script>放最后的话等文档树加载完就执行，加window.onload的话还要等图片等加载完才执行）
+    
+//    window.onload=function () {
+//      document.getElementById("btn").onclick=function () {
+//        alert("您好");
+//      };
+//    };
+
+//    onload=function () {
+//      document.getElementById("btn").onclick=function () {
+//        alert("您好");
+//      };
+//    };
+
+    //扩展的事件---页面关闭后才触发的事件   ie
+//    window.onunload=function () {
+//
+//    };
+    //扩展事件---页面关闭之前触发的    ie
+//    window.onbeforeunload=function () {
+//      alert("哈哈");
+//    };
+
+  </script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script src="common.js"></script>
+</body>
+</html>

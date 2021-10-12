@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <script>
+
+    //以后写代码这样搞，代码都放在自己的沙箱中，这样就不会有任何冲突(比如下面两个var str=。。。都写在window中就冲突了)
+
+    //沙箱
+    (function () {
+      console.log(str);//undefined 因为有预解析
+      var str="小白喜欢小黑";
+      str=str.substr(2);
+      console.log(str);
+    }());
+
+    //沙箱
+    (function () {
+      var str="小明喜欢小红";
+      str=str.substr(2);
+      console.log(str);
+    }());
+
+  </script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script>
+
+  //点击按钮,弹出对话框
+  (function () {
+    document.getElementById("btn").onclick=function () {
+      console.log("按钮被点击了");
+    };
+  }());
+
+</script>
+</body>
+</html>

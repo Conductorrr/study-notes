@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            font-size:30px;
+            text-align: center;
+            color:red;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var demo = document.getElementById("demo");
+            var endTime = new Date("2019/11/19 17:30:00"); // 最终时间
+            setInterval(clock,1000); // 定时器
+            function clock() {
+                var nowTime = new Date(); // 一定是要获取最新的时间   最新时间是以new Date()为基准，不是getTime
+                var second = parseInt((endTime.getTime() - nowTime.getTime()) / 1000);//(将来的毫秒数-现在的毫秒数)/1000  得到还剩下的秒数  可能除不尽 取整
+                var d = parseInt(second / 3600 / 24);
+                var h = parseInt(second / 3600  % 24);
+                var m = parseInt(second / 60 % 60);
+                var s = parseInt(second % 60);
+                d<10 ? d="0"+d : d;
+                h<10 ? h="0"+h : h;
+                m<10 ? m="0"+m : m;
+                s<10 ? s="0"+s : s;
+                demo.innerHTML = "距离抢购时间还剩: "+d+"天 "+h+"小时 "+m+"分钟 "+s+"秒";
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="demo"></div>
+</body>
+</html>

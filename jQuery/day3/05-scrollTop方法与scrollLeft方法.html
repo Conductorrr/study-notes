@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      height: 4000px;
+      width: 4000px;
+    }
+  </style>
+</head>
+<body>
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+  $(function () {
+    
+    $(window).scroll(function () {
+      //直接获取到的是数字
+      console.log($(window).scrollTop());
+      console.log($(window).scrollLeft());
+    });
+    
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input type="button" value="呵呵" id="btn">
+<input type="text" value="洋酒" id="txt">
+
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+  $(function () {
+    //console.log($("#btn").val()); //获取
+    //$("#btn").val("哈哈");  //设置
+    //$("#txt").val("123");
+    
+    
+    $("#txt").focus(function () {
+      //如果是默认值，清空内容
+      if($(this).val() === "洋酒"){
+        $(this).val("");
+      }
+    });
+  
+    $("#txt").blur(function () {
+      if($(this).val() === ""){
+        $(this).val("洋酒");
+      }
+    });
+    
+  });
+</script>
+</body>
+</html>

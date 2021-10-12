@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            position: absolute;
+            top: 0;
+        }
+        #left{
+            left: 0;
+        }
+        #right{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <img src="1.gif" alt="" id="left">
+    <img src="2.gif" alt="" id="right">
+    <p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+<p>天王盖地虎,小鸡炖蘑菇</p>
+</body>
+</html>
+<script>
+    function $(id){  //id函数
+        return document.getElementById(id);
+    }
+    function hide(id){  //隐藏函数
+        $(id).style.display = "none";
+    }
+    function show(id){
+        $(id).style.display = "block";
+    }
+    setTimeout(closeAd,5000);  //5秒钟之后去执行函数closeAd
+    function closeAd(){
+        hide("left");
+        hide("right");
+    }
+</script>

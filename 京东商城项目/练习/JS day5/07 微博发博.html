@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style-type: none;
+        }
+        .box{
+            width: 600px;
+            height: auto;
+            margin: 100px auto;
+            border: 1px solid #000;
+            padding: 30px 0;
+        }
+        textarea{
+            width: 450px;
+            resize: none;
+        }
+        .box li{
+            width: 450px;
+            border-bottom: 1px dashed #ccc;
+            line-height: 30px;
+            margin-left: 80px;
+        }
+        .box li a{
+            float: right;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var btn = document.getElementsByTagName("button")[0];
+            var txt = document.getElementsByTagName("textarea")[0];
+            var ul = document.createElement("ul");
+            btn.parentNode.appendChild(ul);
+            btn.onclick = function(){
+                if(txt.value == ""){
+                    alert("不能为空");
+                    return false;  //终止函数执行
+                }
+                var li = document.createElement("li");
+                li.innerHTML = txt.value + "<a href='javascript:;'>删除</a>";
+                var lis = ul.children;
+                if(lis.length==0){//让我们新发布的内容在最上现实
+                    ul.appendChild(li);
+                }
+                else{
+                    ul.insertBefore(li,lis[0]);
+                }
+                txt.value = "";
+            }
+
+            //删除
+            var as = document.getElementsByTagName("a");
+            for(var i=0;i<as.length;i++){
+                as[i].onclick = function(){
+                    ul.removeChild(this.parentNode);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        微博发布：<textarea name="" id="" cols="30" rows="10"></textarea><button>发布</button>
+    </div>
+</body>
+</html>

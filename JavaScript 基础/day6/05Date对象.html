@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>$永远的24k纯帅$</title>
+  <script>
+     var dt = new Date(); //当前的时间---当前的服务器
+     console.log(dt);//Wed Jul 24 2019 16:53:34 GMT+0800 (中国标准时间)
+
+     var dt1 = new Date("2017-08-12"); //传入时间
+     console.log(dt1);//Sat Aug 12 2017 08:00:00 GMT+0800 (中国标准时间)
+
+
+
+
+     console.log(Date.now());//得到毫秒值
+     console.log(+new Date());//得到毫秒值   //一种特殊的写法,只适用于这个Date的对象
+
+
+
+
+     //获取年份
+     console.log(dt.getFullYear()); //2020
+     //获取月份
+     console.log(dt.getMonth()+1);//2  是0开始的 真实的月份是需要加1的
+     //获取日期
+     console.log(dt.getDate()); //25
+     //获取小时
+     console.log(dt.getHours()); //19
+     //获取分钟
+     console.log(dt.getMinutes()); //14
+     //获取秒
+     console.log(dt.getSeconds()); //44
+     //获取星期
+     console.log(dt.getDay());// 2 星期从0开始的(周日算0)
+
+
+
+
+    console.log(dt.toDateString());//日期     Wed Jul 24 2019
+    console.log(dt.toLocaleDateString());//日期-数字格式    2019/7/24
+
+    console.log(dt.toTimeString());//时间(时分秒)     17:13:41 GMT+0800 (中国标准时间)
+    console.log(dt.toLocaleTimeString());//时间(时分秒)      下午5:13:41
+
+    console.log(dt.valueOf());//得到毫秒值  距离1970年的毫秒值
+    console.log(dt.getTime());//得到毫秒值
+
+    console.log(dt);
+    console.log(dt.toString());//转成字符串
+
+    var num=10;
+    console.log(num.toString());
+
+
+    
+
+//     console.log(getDate(new Date()));// 格式化日期和时间，得到：2019年09月06日 18:43:26
+
+
+    const end = new Date()
+    console.log('啊啊啊啊1', end) // Mon Feb 22 2021 19:57:35 GMT+0800 (中国标准时间)
+    end.setTime(end.getTime() - 3600 * 1000 * 24) // setTime()方法以毫秒设置 Date 对象
+    console.log('啊啊啊啊2', end) // Sun Feb 21 2021 19:57:35 GMT+0800 (中国标准时间)
+
+  </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    #dv1{
+      width: 300px;
+      height: 200px;
+      background-color: red;
+    }
+    #dv2{
+      width: 250px;
+      height: 150px;
+      background-color: green;
+    }
+    #dv3{
+      width: 200px;
+      height: 100px;
+      background-color: blue;
+    }
+  </style>
+  <script>
+    // 事件冒泡：当一个元素接收到事件的时候 会把他接收到的事件传给自己的父级，一直到window（?document吧）。
+    //（注意这里传递的仅仅是事件，并不传递所绑定的事件函数。所以如果父级没有绑定事件函数，就算传递了事件也不会有什么表现）
+  </script>
+</head>
+<body>
+<div id="dv1">
+  <div id="dv2">
+    <div id="dv3"></div>
+  </div>
+</div>
+<script src="common.js"></script>
+<script>
+
+  //如何阻止（取消/停止）事件冒泡:
+  //window.event.cancelBubble = true; IE特有的。谷歌支持，火狐不支持
+  //event.stopPropagation(); 谷歌和火狐支持
+
+  my$("dv1").onclick=function (event) {
+    console.log(this.id);
+  };
+  my$("dv2").onclick=function (event) {
+    console.log(this.id);
+    //window.event.cancelBubble=true;
+  };
+  //事件对象event
+  my$("dv3").onclick=function (event) {//函数在调用的时候，默认会传一个参数给这个function，写一个参数e来接收传进来的参数
+    console.log(this.id);
+    event.stopPropagation();
+  };
+
+//  document.body.onclick=function () { //点下面就没反应，因为body被里面的元素撑开，body就这么高
+//      console.log("颤抖吧,你们这些愚蠢的标签");
+//  };
+
+</script>
+</body>
+</html>

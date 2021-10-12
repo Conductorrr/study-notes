@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    img {
+      vertical-align: top;
+    }
+
+    .main {
+      margin: 0 auto;
+      width: 1000px;
+      margin-top: 10px;
+
+    }
+
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="top" id="topPart">
+  <img src="images/top.png" alt=""/>
+</div>
+<div class="nav" id="navBar">
+  <img src="images/nav.png" alt=""/>
+</div>
+<div class="main" id="mainPart">
+  <img src="images/main.png" alt=""/>
+</div>
+<script src="common.js"></script>
+<script>
+
+  //获取页面向上或者向左卷曲出去的距离
+  function getScroll() {
+    return {
+      //浏览器卷曲出去的距离，html页面卷曲出去的距离，body卷曲出去的距离。有的浏览器支持这个有的支持那个，如果有个浏览器这3种都不支持就给个0以免报错，告诉浏览器获取不到
+      left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft||0,
+      top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    };
+  }//返回的是一个对象
+
+  //我们看到的浏览器中的滚动条是属于浏览器的，所以是浏览器的滚动事件。拉动浏览器的这个滚动条，页面向上卷曲出去，要获得页面向上卷曲出去的这个距离有3种写法  
+  window.onscroll=function () {
+    if(getScroll().top>=my$("topPart").offsetHeight){//向上卷曲出去的距离和最上面的div的高度对比
+      my$("navBar").className="nav fixed";
+      my$("mainPart").style.marginTop=my$("navBar").offsetHeight+10+"px";//设置mainPart的marginTop的值 不然navBar脱标了mainPart直接跳上去了
+    }else{
+      my$("navBar").className="nav";
+      my$("mainPart").style.marginTop="10px";
+    }
+  };
+
+</script>
+
+</body>
+</html>

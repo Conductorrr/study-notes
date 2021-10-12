@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script src="common.js"></script>
+<script src="programmer1.js"></script>
+<script src="programmer2.js"></script>
+<script>
+
+
+  my$("btn").onclick=function () {
+    console.log("小杨好帅哦");
+  };
+
+  //用on...的方式为同一个元素绑定多个相同的事件会覆盖
+  //其次，不能对事件捕获或事件冒泡进行控制，只能使用事件冒泡，无法切换成事件捕获
+</script>
+</body>
+</html>

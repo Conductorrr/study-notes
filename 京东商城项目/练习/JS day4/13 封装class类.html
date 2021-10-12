@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            // 原理：取出所有的元素，利用遍历的方法，通过每一个元素的className来判断。
+            function getClass(classname){
+                //如果浏览器支持，则直接返回
+                if(document.getElementsByClassName){
+                    return document.getElementsByClassName(classname);
+                }
+
+                //不支持的浏览器：
+                var dom = document.getElementsByTagName("*");
+                var arr = [];//用于存放满足的元素
+                for(var i=0;i<dom.length;i++){
+                    var txtarr = dom[i].className.split(" ");//字符串转数组，以空格分割
+                    for(var j;j<txtarr.length;j++){
+                        if(txtarr[j]==classname){
+                            arr.push(dom[i]);
+                        }
+                    }
+                }
+                return arr;
+            }
+            alert(getClass("test").length);
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div class="demo "></div>
+    <div class="demo test"></div>
+    <div></div>
+    <div></div>
+    <div class="demo test index"></div>
+    <div></div>
+    <div class="demo"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

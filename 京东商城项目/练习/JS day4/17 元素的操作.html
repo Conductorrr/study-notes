@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+        <script type="text/javascript">
+        (function () {
+          var s = document.getElementsByTagName('script')[0];
+          console.log(s)
+        })();
+        </script>
+    </head>
+    <body>
+        <div id="demo">
+            <div id="one"></div>
+            <div id="two"></div>
+        </div>
+        <script>
+            var demo = document.getElementById("demo");
+            var childrens = demo.children;
+
+            var test1 = document.createElement("div");//创建节点
+            demo.appendChild(test1);//插入节点
+
+            var test2 = document.createElement("div");
+            demo.insertBefore(test2,childrens[1]);//插入节点
+
+            var one = document.getElementById("two");
+            demo.removeChild(one);//移除节点
+
+            demo.appendChild(childrens[0].cloneNode());//克隆节点
+            demo.parentNode.appendChild(demo.cloneNode(true));
+        </script>
+    </body>
+</html>
