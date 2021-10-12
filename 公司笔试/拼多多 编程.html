@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //判断一个人是否大于18岁
+        var str = '2000-1-1';
+        function age(str) {
+            var arr = str.split("-");
+            var date = new Date();
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            if(y-arr[0]>18){
+                return true;
+            }else if(y-arr[0]==18 && m>arr[1]){
+                return true;
+            }else if(y-arr[0]==18 && m==arr[1] && d>arr[2]){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        console.log(age(str))
+
+
+
+        //去掉字符串中的数字
+        var str = "h1e2l3l4o";
+        function trimNumber(str) {
+            var arr = [];
+            for(var i=0;i<str.length;i++){
+                if(str[i]>=0&&str[i]<=9){//会将str[i]转换为数值再进行比较
+                    continue;
+                }
+                arr.push(str[i])
+            }
+            return arr.join("");
+        }
+        console.log(trimNumber(str))
+
+
+
+        //编写一个输出日志的函数log，在输出内容前面加上前缀(app),如
+        //log(“Hello world”)返回“(app)Hello world”
+        //log(“Hello”,”world”)返回”(app)Hello world”
+        function log(){
+            var args = Array.prototype.slice.call(arguments);
+            var t=args.toString().replace(',',' ')
+            console.log('(app)'+t)
+        }
+        log( 'hello','word');
+    </script>
+</body>
+</html>

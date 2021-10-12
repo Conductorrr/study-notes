@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>  
+    <script>
+        // let sum = 1;
+        // const func = n => n<=2?1:func(n-1)+func(n-2);
+        // sum+= [func(3),func(6)].reduceRight((cur,next)=>`${cur}`+`${next}`);
+        // console.log(sum)
+
+        console.log(['10', '1010', '101010'].map(parseInt)) //[10, NaN, 42]
+        //相当于[parseInt('10',0),parseInt('1010',1),parseInt('101010',2)]
+        //parseInt有两个参数，放在map里，parseInt第一个参数接收的是数组元素，第二个参数接收的是数组元素的索引
+        //注意parseInt第二个参数的讲究
+    </script>
+
+    
+    <script>
+        //获取最长公共子序列,返回它的长度
+
+        function longestSubStrLength(s1, s2) {
+            if (s1 == null || s2 == null) {
+                return 0;
+            }
+            if (s1 == "" || s1 == "") {
+                return 0;
+            }
+            var max = "";
+            var min = "";
+            if (s1.length < s2.length) {
+                max = s1;
+                min = s2;
+            } else {
+                max = s1;
+                min = s2;
+            }
+            var current = "";
+            for (var i = 0; i < min.length; i++) {
+                for (var begin = 0, end = min.length - i; end <= min.length; begin++, end++) {
+                    current = min.substring(begin, end);
+                    if (max.includes(current)) {
+                        return current.length;
+                    }
+                }
+            }
+            return 0;
+        }
+        var str1 = "abcd";
+        var str2 = "abdde";
+        console.log(longestSubStrLength(str1, str2)) //2
+    </script>
+
+
+    <script>
+        //App版本号大小比较
+
+        function sortVersion(s1, s2) {
+            if (s1 == s2) {
+                return 0;
+            }
+            var version1Array = s1.split(".");
+            var version2Array = s2.split(".");
+            var index = 0;
+            var minLen = Math.min(version1Array.length, version2Array.length);
+            var diff = 0;
+            while (index < minLen && (diff = parseInt(version1Array[index]) - parseInt(version2Array[index])) == 0) {
+                index++;
+            }
+            if (diff == 0) {
+                for (var i = index; i < version1Array.length; i++) { //如果版本1后面    s2 s1
+                    if (parseInt(version1Array[i]) > 0) {
+                        return 1;
+                    }
+                }
+                for (var j = index; j < version2Array.length; j++) { //如果版本2后面    s1 s2
+                    if (parseInt(version2Array[j]) > 0) {
+                        return -1;
+                    }
+                }
+                return 0;
+            } else {
+                return diff > 0 ? 1 : -1;
+            }
+        }
+        var _s1 = '5.2.0'
+        var _s2 = '5.10'
+        var res = sortVersion(_s1, _s2)
+        if (res == 0) {
+            console.log(_s1 + ',' + _s2)
+        } else if (res == 1) {
+            console.log(_s2 + ',' + _s1)
+        } else {
+            console.log(_s1 + ',' + _s2)
+        }
+    </script>
+
+
+</body>
+
+</html>

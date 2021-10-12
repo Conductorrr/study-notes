@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        一个数据结构只要具有Symbol.iterator属性，就称为部署了遍历器接口（Iterator接口），就认为是“可遍历的”（iterable），就可以完成遍历操作（即依次处理该数据结构的所有成员）
+        Iterator的作用有三个：
+            一是为各种数据结构，提供一个统一的、简便的访问机制；
+            二是使得数据结构的成员能够按某种次序排列；
+            三是，Iterator接口主要供for...of循环消费（该循环会自动去寻找Iterator接口）
+        ES6的有些数据结构原生具备Iterator接口：Array、Map、Set、String、TypedArray、arguments对象、NodeList对象 
+        */
+
+        
+
+        // 遍历器接口的实现：(以对对象部署遍历器接口为例)
+
+        // 法一：
+        // 添加Symbol.iterator方法，是遍历器生成函数，返回一个遍历器对象；
+        // 调用该遍历器对象的next方法，返回一个对象包含value和done两个属性，同时，自动将内部指针移到下一个实例。
+        // (value属性是当前成员的值，done属性是一个布尔值，表示遍历是否结束。)
+
+        let obj = {
+            0: 'a',
+            1: 'b',
+            2: 'c',
+            length: 3,
+
+            [Symbol.iterator]: function () {
+                var index = 0;
+                var self = this; // 个人感觉是因为，返回的是一个对象，this就是返回对象的this，不是obj的this，this也不会去找外层的this用，但是self能去找外层的self。
+                return {
+                    next: function () {
+                        if (index < self.length)
+                            return {
+                                value: self[index++],
+                                done: false
+                            }
+                        else
+                            return {
+                                value: undefined,
+                                done: true
+                            }
+                    }
+                }
+            }
+
+            // 法二：类似数组的对象（存在数值键名和length属性），部署Iterator接口有一个简便方法：[Symbol.iterator]属性直接引用数组的Iterator接口
+            // [Symbol.iterator] : Array.prototype[Symbol.iterator]
+        }
+
+        let it = obj[Symbol.iterator]()
+        console.log(it.next().value) // a
+        console.log(it.next().value) // b
+        console.log(it.next().value) // c
+        console.log(it.next().value) // undefined
+
+        // 有了遍历器接口就能被for...of循环遍历了，不然会报错
+        for (let i of obj) {
+            console.log(i)
+        }
+        // a
+        // b
+        // c
+
+        // 法三：Generator函数其实就是遍历器生成函数，因此可以把Generator函数赋值给对象的[Symbol.iterator]属性，从而使得该对象具有Iterator接口
+        // 下面代码中，Symbol.iterator方法几乎不用部署任何代码，只要用 yield 命令给出每一步的返回值即可。
+        let obj2 = {
+            [Symbol.iterator]: function* () {
+                yield 'hello';
+                yield 'world';
+            }
+        }
+        for(let i of obj2) {
+            console.log(i)
+        }
+        // hello
+        // world
+
+
+
+        //（btw，其实对象部署遍历器接口并不是很必要，可以不用对象用Map）
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //     const a = {valueOf(){
+        //         return 'valueOf'
+        //     },
+        //     toString(){
+        //         return 'toString'
+        //     },
+        //     get(){
+        //         return 'get'
+        //     }
+        //     }
+        // alert(a)
+
+        // function fun() {
+        //     return () => {
+        //         return () => {
+        //             return () => {
+        //                 console.log(this.name)
+        //             }
+        //         }
+        //     }
+        // }
+        // var f = fun.call({name:'foo'})
+        // var t1 = f.call({name:'bar'})()()
+        // var t2 = f().call({name:'baz'})()
+        // var t3 = f()().call({name:'qux'})
+
+        // var a = 1
+        // function fn1() {
+        //     console.log(this.a)
+        // }
+        // const fn2 = () => {
+        //     console.log(this.a)
+        // }
+        // const obj = {
+        //     a:10,
+        //     fn1:fn1,
+        //     fn2:fn2
+        // }
+        // fn1()
+        // fn2()
+        // obj.fn1()
+        // obj.fn2()
+
+
+
+        //给一个数字x，求满足S(n)>=x的最小正整数n，S(n)是n各位数字和
+        var x = 18;
+        var len = parseInt(x / 9);
+        var n = ''
+        if (x % 9 != 0)
+            n += (x % 9)
+        for (let i = 0; i < len; i++) {
+            n += 9
+        }
+        console.log(n)
+
+
+
+        //给定数字a,b,p,q，每次操作可以将a变成a+p或者将p变成p*q，问至少几次操作使得a>=b ？
+        var a = 1,
+            b = 15,
+            p = 4,
+            q = 2;
+        var res = 0
+        while (a < b) {
+            if (a + p < b) {
+                p = p * q;
+                res++;
+            } else {
+                a += p;
+                res++;
+            }
+        }
+        console.log(res);
+    </script>
+</body>
+
+</html>

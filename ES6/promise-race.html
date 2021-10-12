@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function runAsync1() {
+            var p = new Promise(function (resolve, reject) {
+                //做一些异步操作
+                setTimeout(function () {
+                    console.log('异步任务1执行完成');
+                    resolve('随便什么数据1');
+                }, 1000);
+            });
+            return p;
+        }
+
+        function runAsync2() {
+            var p = new Promise(function (resolve, reject) {
+                //做一些异步操作
+                setTimeout(function () {
+                    console.log('异步任务2执行完成');
+                    resolve('随便什么数据2');
+                }, 2000);
+            });
+            return p;
+        }
+
+        function runAsync3() {
+            var p = new Promise(function (resolve, reject) {
+                //做一些异步操作
+                setTimeout(function () {
+                    console.log('异步任务3执行完成');
+                    resolve('随便什么数据3');
+                }, 2000);
+            });
+            return p;
+        }
+
+        /*
+        Promise.race 谁快，以谁为准执行回调  剩下的2个promise也仍会执行不会就此中断
+        */
+        var p = Promise.race([runAsync1(),runAsync2(),runAsync3()]);
+        p.then(function (results) {
+            console.log(results)
+        })
+        //异步任务1执行完成
+        //随便什么数据1
+        //异步任务2执行完成
+        //异步任务3执行完成
+
+    </script>
+</body>
+
+</html>

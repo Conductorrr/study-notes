@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<script>
+//找出字符串中出现次数最多的那个子串，并统计出现频数
+var str = '1sfdljfdffdafd';
+var json = {};
+var num = 0;
+for(var i = 0; i < str.length; i++){
+    if(!json[str[i]]){
+        json[str[i]] = 1;
+    }else{
+        json[str[i]]++;
+    }
+}
+for(var key in json){
+    if(json[key]>num){
+        num = json[key];
+    }
+}
+console.log(num)
+</script>
+</body>
+</html>

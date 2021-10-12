@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [1,2,4,4,3,3,1,5,3];
+
+    function duplicate(arr) {//法1
+        arr.sort();
+        var newArr = []
+        for(var i=0;i<arr.length;i++){
+            if(arr[i]==arr[i+1]&&newArr.indexOf(arr[i])==-1){
+                newArr.push(arr[i]);
+                i++;
+            }
+        }
+        return newArr;
+    }
+
+    function duplicate2(arr) {//法2 不需要额外空间且时间复杂度为O(n)
+
+    }
+
+    console.log(duplicate(arr));
+  </script>  
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <strong>aaa</strong>
+    <script>
+
+    console.log([[0,1],[2,3]].reduce(
+        (acc,cur)=> {
+            return acc.concat(cur)
+        },
+        [1,2]
+    ))
+
+    var arr = [20,10,30,3].sort()
+    console.log(arr)
+
+    console.log(!!null)
+    console.log(!!"")
+    console.log(!!1)
+
+
+        var aaaa = setTimeout(function(){
+            console.log(1)
+        }, 300);
+        console.log(aaaa)
+
+
+    console.log('dada'.split('')+'')
+
+    // let a=3;
+    // let b = new Number(3)
+    // let c = 3;
+    // console.log(a==b)
+    // console.log(a===b)
+    // console.log(b===c)
+
+    var a =1;
+    var b = function () {
+        console.log(a)
+    }
+    function d(){
+        var a =2;
+        b()
+    }
+    d()
+
+    let num =10;
+    const increaseNumber = () => num++;
+    const increasePassedNumber = number => number++;
+    const num1 = increaseNumber()
+    const num2 = increasePassedNumber(num)
+    console.log(num1)
+    console.log(num2)
+
+    console.log(5+'45')
+    </script>
+</body>
+</html>

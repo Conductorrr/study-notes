@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 扩展运算符...，将具有Iterator接口的东西，转为用逗号分隔的参数序列
+        console.log(...[1, 2, 3]) // 1 2 3
+        console.log(...[1, 2, [3, 4, 5, [6, [7]]], [8, [9, [10]]]]) // 1, 2, [3, 4, 5, [6, [7]]], [8, [9, [10]]]
+        // console.log(...set) // 1 2 3 4
+
+
+        // Array.from()将类似数组的对象和可遍历(iterable)的对象转为真正的数组
+
+
+        // Array.of()方法用于将一组值转换为数组
+        Array.of(3, 11, 8) // [3,11,8]
+
+
+        // .copyWithin(target, start = 0, end = this.length) 将数组指定位置的成员复制到其他位置（会覆盖原有成员）；返回当前数组（会修改当前数组）
+        // 从target位置开始替换，替换内容从start开始end前结束。负值表示从末尾开始。
+        [1, 2, 3, 4, 5].copyWithin(0, 3, 4) //[4, 2, 3, 4, 5]
+
+
+        // fill方法使用给定值，填充一个数组。
+        ['a', 'b', 'c'].fill(7) // [7, 7, 7]    数组中已有的元素，会被全部抹去
+        new Array(3).fill(7) // [7, 7, 7]    fill方法用于空数组的初始化非常方便
+        ['a', 'b', 'c'].fill(7, 1, 2) // ['a', 7, 'c']    fill方法还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置。
+
+
+        //数组扁平化    flat()返回一个新数组
+        [1, 2, [3, 4, 5, [6, [7]]], [8, [9, [10]]]].flat(2) //[1, 2, 3, 4, 5, 6, [7], 8, 9, [10]]
+        [1, 2, [3, 4, 5, [6, 7]]].flat(Infinity) //[1, 2, 3, 4, 5, 6, 7]
+    </script>
+</body>
+
+</html>

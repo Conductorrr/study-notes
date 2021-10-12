@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #000;
+        }
+
+        #div2 {
+            height: 50px;
+            width: 50px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div" class="ddd ddd2">
+        <div id="div2">
+            <button id="btn">点击</button>
+        </div>
+    </div>
+    <script>
+        // 2
+        const getEvent = (event) => {
+            event = event || window.event;
+            if (!event) {
+                return event;
+            }
+            if (!event.target) {
+                event.target = event.srcElement;
+            }
+            if (!event.currentTarget) {
+                event.currentTarget = event.srcElement;
+            }
+            return event;
+        }
+
+        // 1
+        document.body.addEventListener('click', (event) => {
+            const eventFix = getEvent(event);
+            if (!eventFix) {
+                return;
+            }
+            this._handleEvent(eventFix);
+        }, false)
+
+        // 4 获取元素唯一标识domPath
+        const getDomPath = (element, useClass = false) => {//element -> event.target
+            if (!(element instanceof HTMLElement)) {//判断一个对象是不是DOM对象---规定所有的DOM对象都是HTMLElement的实例(HTMLElement是所有HTML元素的基本接口)
+                console.warn('input is not a HTML element!');
+                return '';
+            }
+            let domPath = [];
+            let elem = element;
+            while (elem) {//把当前元素到body之间的整个dom路径记录下来
+                let domDesc = getDomDesc(elem, useClass);//字符串#btn
+                if (!domDesc) {
+                    break;
+                }
+                domPath.unshift(domDesc);
+                // if (querySelector(domPath.join('>')) === element || domDesc.indexOf('body') >= 0) {//第一次的时候只有一个元素 或 只有body元素 就不用往下执行了
+                //     break;
+                // }
+                domPath.shift();
+                const children = elem.parentNode.children;
+                if (children.length > 1) {//同一级上出现了多个相同tagName元素，那我们要定位到这个event.target这个元素在这一级里的第几个，这样就可以在document.querySelector(domPath)里唯一定位到这个元素
+                    for (let i = 0; i < children.length; i++) {
+                        if (children[i] === elem) {
+                            domDesc += `:nth-child(${i + 1})`;
+                            break;
+                        }
+                    }
+                }
+                domPath.unshift(domDesc);
+                // if (querySelector(domPath.join('>')) === element) {
+                //     break;
+                // }
+                elem = elem.parentNode;
+            }
+            return domPath.join('>');
+        }
+
+        // 5 获取元素的id或tagName或className或---字符串
+        function getDomDesc(element, useClass = false) {//element -> event.target
+            domDesc = []
+            if (!element || !element.tagName) {
+                return '';
+            }
+            if (element.id) {
+                return `#${element.id}`;
+            }
+            domDesc.push(element.tagName.toLowerCase());
+            if (useClass) {
+                const className = element.className;
+                if (className && typeof className === 'string') {
+                    const classes = className.split(/\s+/);
+                    domDesc.push(`.${classes.join('.')}`);
+                }
+            }
+            if (element.name) {
+                domDesc.push(`[name=${element.name}]`);
+            }
+            return domDesc.join('');
+        }
+
+        function querySelector(queryString) {
+            return document.getElementById(queryString) || document.getElementsByName(queryString)[0] || document.querySelector(queryString);
+        }
+
+        // 3
+        function _handleEvent(event) {
+            const domPath = getDomPath(event.target);
+            console.log(domPath);
+            console.log(querySelector(domPath))
+            // const rect = getBoundingClientRect(event.target);
+            // if (rect.width == 0 || rect.height == 0) {
+            //     return;
+            // }
+            // let t = document.documentElement || document.body.parentNode;
+            // const scrollX = (t && typeof t.scrollLeft == 'number' ? t : document.body).scrollLeft;
+            // const scrollY = (t && typeof t.scrollTop == 'number' ? t : document.body).scrollTop;
+            // const pageX = event.pageX || event.clientX + scrollX;
+            // const pageY = event.pageY || event.clientY + scrollY;
+            // const data = {
+            //     domPath: encodeURIComponent(domPath),
+            //     trackingType: event.type,
+            //     offsetX: ((pageX - rect.left - scrollX) / rect.width).toFixed(6),
+            //     offsetY: ((pageY - rect.top - scrollY) / rect.height).toFixed(6),
+            // };
+            // this.send(data);
+        }
+    </script>
+</body>
+
+</html>

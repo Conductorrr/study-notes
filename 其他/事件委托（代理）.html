@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="myLinks">
+        <li id="goSomewhere">Go somewhere</li>
+        <li id="doSomething">Do something</li>
+        <li id="sayHi">Say hi</li>
+    </ul>
+
+    <script>
+        /*
+        事件委托的原理：（利用事件冒泡原理）
+        给父级注册事件，里面的元素接收到事件，会把接收到的事件传给父级，委托它们的父级代为执行事件
+
+        优点：
+        1. 提高性能，大量节省内存占用，减少事件注册
+        2. 新添加的子元素也可以注册上事件，无需再对其绑定事件 */
+
+        //只有点击ul中的li会触发事件
+        var myLinks = document.getElementById("myLinks");
+        myLinks.onclick = function (event) {
+            var event = event || window.event;
+            var target = event.target || event.srcElement;
+            if (target.nodeName.toLowerCase() == 'li') { //event.target.nodeName
+                alert(123);
+                alert(target.innerHTML);
+            }
+        }
+
+        //每个li被点击的效果都不一样怎么搞：
+        document.addEventListener("click", function (event) {
+            switch (event.target.id) {
+                case "doSomething":
+                    document.title = "事件委托";
+                    break;
+                case "goSomewhere":
+                    location.href = "http://www.baidu.com";
+                    break;
+                case "sayHi":
+                    alert("hi");
+                    break;
+            }
+        })
+
+    </script>
+</body>
+
+</html>

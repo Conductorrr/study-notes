@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var stack1 = [],
+            stack2 = [];
+
+        function push(n) {
+            stack1.push(n);
+        }
+
+        function pop() {
+            if (stack2.length === 0) {
+                if (stack1.length === 0) {
+                    return null;
+                } else {
+                    var len = stack1.length;
+                    for (var i = 0; i < len; i++) {
+                        stack2.push(stack1.pop());
+                    }
+                    return stack2.pop();
+                }
+            } else {
+                return stack2.pop();
+            }
+        }
+
+        // 测试
+        push(1); // stack1:[1]
+        push(2); // stack1:[1,2]
+        push(3); // stack1:[1,2,3]
+        console.log(pop()); //stack1:[] stack2:[3,2] 输出1
+        console.log(pop()); //stack1:[] stack2:[3]   输出2
+        push(4); // stack1:[4]
+        push(5); // stack1:[4,5]
+        console.log(pop()); //stack1:[4,5] stack2:[] 输出3
+        console.log(pop()); //stack1:[]    stack2:[5,4] 输出4
+        console.log(pop()); //stack1:[]    stack2:[] 输出5
+    </script>
+</body>
+
+</html>

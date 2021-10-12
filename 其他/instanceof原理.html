@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 看 对象的._proto_属性 是否指向 构造函数的原型Person.prototype
+
+        function Person(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+
+        function Student(name, age, sex, score) {
+            Person.call(this, name, age, sex);
+            this.score = score;
+        }
+
+        Student.prototype = new Person(); // 这里改变了原型指向，实现继承
+        var stu = new Student("小明", 20, "男", 99); 
+        console.log(stu instanceof Student); // true
+        console.log(stu instanceof Person); // true
+        console.log(stu instanceof Object); // true
+
+
+        function instance_of(L, R) { // L即stu ；  R即Person        
+            var O = R.prototype; // O为Person.prototype     
+            L = L.__proto__; // L为stu._proto_
+            while (true) { // 执行循环
+                if (L === null) // 不通过                            
+                    return false;
+                if (O === L) // 判断：Person.prototype === stu._proto_   
+                    return true; 
+                L = L.__proto__; // 继承用    令L=  stu._proto_._proto_，指的就是Person.prototype，所以也返回true
+            } 
+        } 
+
+        console.log(instance_of(stu,Student))// true
+        console.log(instance_of(stu,Person))// true
+
+    </script>
+</body>
+
+</html>

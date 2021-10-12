@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //数字置换
+
+        // var aaa = "1234567"
+        // var bbb = "9 8 7 6 5 4 3 2 1"
+        var aaa = "-12"
+        var bbb = "2 3 7 6 5 4 3 2 1"
+
+        var num = aaa.split('');
+        var a;
+        if(num[0] === '-') {
+            [flag,...a] = num;
+        } else {
+            a = num;
+        }
+        var a_a = [];
+        for(let i = 0; i<a.length;i++){
+            a_a[i]=a[i]
+        }
+        var b = bbb.split(' ')
+        b.forEach(function (value,index) {
+            var ind = index + 1;
+            if(ind <= a.length) {
+                for(let i = 0; i < a.length; i++) {
+                    if(parseInt(a[i]) == ind) {
+                        a_a[i] = value;
+                    }
+                }
+            }
+        })
+        if(num[0] === '-') {
+            console.log('-' + a_a.join(''))
+        } else {
+            console.log(a_a.join(''))
+        }
+        
+    </script>
+</body>
+</html>

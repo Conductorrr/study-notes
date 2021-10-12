@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Map，数据结构，类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键
+        //如果需要“键值对”的数据结构，Map比 Object更合适
+
+        let map1 = new Map()
+            .set(1, 'a')
+            .set(2, 'b')
+            .set(3, 'c');
+
+        //Map接受一个数组作为参数（数组转Map）
+        let map = new Map([
+            ["name", "zhulili"],
+            ['age', 18],
+            [true, 7],
+            [{foo: 3},['abc']]
+        ])
+
+        //属性
+
+        //操作方法  5个
+
+        //遍历器生成函数  3个  这3个方法都返回遍历器对象
+        for (let item of map.keys()) {
+            console.log(item);
+        }
+        // name
+        // age
+        // true
+        // {foo: 3}
+
+        for (let item of map.values()) {
+            console.log(item);
+        }
+        // zhulili
+        // 18
+        // 7
+        // ["abc"]
+
+        for (let item of map.entries()) {
+            console.log(item);
+        }
+        // ["name", "zhulili"]
+        // ['age', 18]
+        // [true, 7]
+        // [{foo: 3},['abc']]
+
+        //遍历Map的所有成员  2个  Map的遍历顺序就是插入顺序
+        
+        for(let [key,value] of map){
+            console.log(key,value)
+        }
+
+        map.forEach(function (value,key,map) {
+            console.log(key,value)            
+        })
+
+        //（感觉由于Map是键值对结构，所以就直接for...of、forEach，keys、values，再用entries没啥意思）
+
+        //Map与其他数据结构的互相转换：
+
+        //Map转数组  ...
+        console.log([...map]) // [["name", "zhulili"], ['age', 18], [true, 7], [{foo: 3},['abc']]]
+    </script>
+</body>
+
+</html>

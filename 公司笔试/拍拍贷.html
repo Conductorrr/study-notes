@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = 'world';
+        (function () {
+            if (typeof name === 'undefined') {
+                var name = 'jack'
+                console.log('goodbye' + name)
+            } else {
+                console.log('hello' + name)
+            }
+        })()
+        //goodbyejack     函数是个局部作用域，var name会变量声明提升到该作用域的最上面
+
+
+        function sid(ary) {
+            ary[0] = ary[2]
+        }
+        function bar(a, b, c) {
+            c = 10
+            sid(arguments)
+            return a + b + c
+        }
+        console.log(bar(1, 1, 1))//21    arguments伪数组，本质是个对象！所以修改c和ary[0]也会修改
+
+
+
+        var low = /^[a-z]+$/
+        console.log([low.test(null), low.test()])
+
+
+
+        function isodd(num) {
+            return num % 2 == 1
+        }
+        function iseven(num) {
+            return num % 2 == 0
+        }
+        function issane(num) {
+            return iseven(num) || isodd(num)
+        }
+        var values = [7, 4, '13', -9, Infinity]
+        console.log(values.map(issane))
+
+
+
+        console.log([1 < 2 < 3, 3 < 2 < 1])
+
+    </script>
+</body>
+
+</html>

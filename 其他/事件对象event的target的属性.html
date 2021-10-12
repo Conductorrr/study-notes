@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div" class="ddd ddd2">啦啦</div>
+    <script>
+        //event.target：事件的实际目标、实际点击的那个元素(dom对象)
+        document.body.addEventListener('click', (event) => {
+            console.log(event.target.name)//undefined
+            console.log(document.getElementById('div'))//<div id="div" class="ddd ddd2"></div>
+            console.log(event.target);//<div id="div" class="ddd ddd2"></div>
+            console.log(event.target.tagName);//DIV
+            console.log(event.target.nodeName);//DIV
+            console.log(event.target.id);//div
+            console.log(event.target.className);//ddd ddd2
+            console.log(event.target.classList);//DOMTokenList(2) ["ddd", "ddd2", value: "ddd ddd2"]
+            console.log(event.target.innerHTML);
+            console.log(event.target.innerText);
+        }, false)
+
+        //event.srcElement相当于event.target，只对老版本的IE浏览器有用
+    </script>
+</body>
+
+</html>

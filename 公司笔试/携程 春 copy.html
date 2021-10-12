@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //数组中是否有2个数的合等于另一个数
+
+        var s = "1 2 11 6 9"
+
+        function sumInteger(s) {
+            var arrStr = s.split(' ');
+            var a = arrStr.map(item => parseInt(item))
+
+            var sum = 0;
+            for (let i = 0; i < a.length; i++) {
+                for (let j = i+1; j < a.length; j++) {
+                    sum = a[i] + a[j];
+                    for(let k = 0; k < a.length; k++)
+                    if (sum == a[k]) {
+                        return true
+                    }
+                }
+
+            }
+            return false
+        }
+        console.log(sumInteger(s))
+
+    </script>
+</body>
+
+</html>

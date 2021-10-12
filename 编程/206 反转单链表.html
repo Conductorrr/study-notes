@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var reverseList = function (head) {//不带头节点的单链表
+            let p = head;
+            let q = null;
+            while (p) {
+                let s = p.next;
+                p.next = q;
+                q = p;
+                p = s;
+            }
+            return q;
+        };
+
+        var reverseList2 = function (head) {//带头节点的单链表
+            let p = head.next;
+            let q = null;
+            head.next=null;
+            while (p) {
+                q=p;
+                q.next = head.next;
+                head.next = q;
+                p=p.next;
+            }
+            return head;
+        };
+    </script>
+</body>
+
+</html>

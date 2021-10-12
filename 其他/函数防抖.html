@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var debounce = function (fn, delay, mustRunDelay) {//封装的高级一点
+            var timer = null;
+            var t_start;
+            return function () {
+                var context = this;
+                var args = arguments;
+                var t_curr = +new Date();
+                clearTimeout(timer);
+                if (!t_start) {
+                    t_start = t_curr;
+                }
+                if (t_curr - t_start >= mustRunDelay) {
+                    fn.apply(context, args);
+                    t_start = t_curr
+                } else {
+                    timer = setTimeout(function () {
+                        fn.apply(context, args);
+                    }, delay);
+                }
+            }
+        }
+
+
+
+        function throttle2(fn, delay) {
+            let preTime = Date.now()
+
+            return function () {
+                let doTime = Date.now()
+                if (doTime - preTime >= delay) {
+                    fn.apply(this, arguments)
+                    preTime = Date.now()
+                }
+            }
+        };
+
+        function operation() {
+            console.log(1)
+        }
+
+        window.onresize = throttle2(operation,1000); 
+    </script>
+</body>
+
+</html>

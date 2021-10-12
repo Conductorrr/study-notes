@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+//敏感词替换
+var str = "呃呃呃轻生，呃呃呃呃sexy呃呃呃呃sexy"
+var badWord = ["轻生","sexy"]
+function rep(str,badWord){
+    for(var i=0;i<badWord.length;i++){
+        var reg = new RegExp(badWord[i],"g")
+        str = str.replace(reg,"*");
+    }
+    return str;
+}
+console.log(rep(str,badWord))
+
+
+var news ="呃呃呃轻生，呃呃呃呃sexy呃呃呃呃sexy";
+var blacklist = ["轻生","sexy"]
+function checke(news,blacklist){
+    blacklist = blacklist.map(function(item){
+        return "("+ item +")";
+    }).join("|");
+    var regex = new RegExp(blacklist,"g");//   /(轻生)|(sexy)/g   没有()也可以
+    return news.replace(regex, "*");
+}
+console.log(checke(news,blacklist));
+
+
+
+//统计数组中每个元素出现的次数，把元素和对应次数放在对象中
+var arr = ["s", "f", "d", "j", "f", "d", "f", "f", "d", "a", "f", "d"]
+var json = {}
+for(let i = 1; i<arr.length;i++){
+    if(!json[arr[i]]){
+        json[arr[i]] = 1
+    }else{
+        json[arr[i]]++
+    }
+}
+console.log(json)
+
+
+
+// console.log('a'-1);//NaN
+//console.log('3'-'1');//number类型的2
+// console.log(typeof Function)//function
+// console.log(typeof Object)//function
+// console.log(typeof NaN)//number
+// console.log(typeof Array)//function
+
+</script>
+</body>
+</html>

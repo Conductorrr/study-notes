@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 改进一下，知不知道宽高都可以水平垂直居中 */
+        .outer{
+            height: 400px;
+            width: 600px;
+            border: 1px solid #000;
+
+            display: table-cell;
+            vertical-align: middle;/*在表格中使用vertical-align的含义：表格单元格内容的中间与其行中间对其。*/
+            text-align: center;/*水平*/
+        }
+        .inner{
+            background-color: red;
+
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="inner">alla</div>
+    </div>
+</body>
+
+</html>

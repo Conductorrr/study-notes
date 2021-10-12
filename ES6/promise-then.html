@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function runAsync() {
+            var p = new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    console.log('执行完成')
+                    resolve('随便什么数据')
+                }, 2000)
+            })
+            return p;
+        } 
+
+        // 一般把Promise封装在函数里。（如果Promise不封装在函数里，Promise新建后就会立即执行，1秒后输出‘执行完成’，封装在函数里就函数调用的时候执行）
+
+        // 为什么Promise的then方法可以链式编程？then方法返回的是一个新的Promise实例（注意，不是原来那个Promise实例），因此可以采用链式写法。
+        // 在then方法的回掉函数中，如果返回的还是一个Promise实例（不是原来那个Promise实例），那后一个then的回调函数，就会等待新Promise对象的状态发
+        // 生变化，才会被调用(就如同第一个一样处理过程)。
+        runAsync()
+            .then(function (data) {
+                console.log(data);
+                return runAsync();
+            })
+            .then(function (data) {
+                console.log(data);
+                return runAsync()
+            })
+            .then(function (data) {
+                console.log(data);
+            })
+
+
+        // 在then方法的回掉函数中，也可以直接return数据而不是Promise对象，return的数据就会作为参数被后一个then的回掉接收到。
+        // runAsync()
+        //     .then(function (data) {
+        //         console.log(data);//随便什么数据
+        //         return 'lala';
+        //     })
+        //     .then(function (data) {
+        //         console.log(data);//lala
+        //         return 'lala2'
+        //     })
+        //     .then(function (data) {
+        //         console.log(data);//lala2
+        //     })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //通过extends关键字实现类的继承
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            sayName() {
+                console.log("the name is:" + this.name);
+            }
+        }
+
+        class Worker extends Person {
+            constructor(name, age, job) {
+                super(name, age) //super表示父类的构造函数，用于调用父类的构造函数
+                this.job = job
+            }
+            sayJob() {
+                console.log("the job is:" + this.job);
+            }
+        }
+
+        var worker = new Worker('tcy', 20, 'teacher');
+        worker.sayJob(); //the job is:teacher
+        worker.sayName(); //the name is:tcy
+
+        console.log(worker)
+        //打印worker，可以看出extends继承就是原型链继承的"马甲"，而super是借用构造函数继承的“马甲”
+        //(class的继承比ES5组合继承更完善：子类原型上是有constructor的而且指向正确，ES5子类原型上没有constructor，直接找父类的；
+        // 其次也不会有new Fu()空参数带来的子类原型上undefined属性的问题）
+
+        //子类构造函数中必须调用super方法，否则新建对象时报错
+        //子类构造函数中必须在使用this前调用super，否则报错
+        //(因为ES6的继承机制是，先将父类实例对象的属性和方法加到this上（所以必须先调用super方法），再用子类的构造函数修改this）
+
+
+
+
+        //super：
+
+        class Person1 {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            sayName() {
+                console.log("the name is:" + this.name);
+            }
+            static sayAge() {
+                console.log("the person1 age")
+            }
+        }
+
+        class Worker1 extends Person1 {
+            constructor(name, age, job) {
+                super(name, age); //super表示父类的构造函数，用于调用父类的构造函数
+                this.job = job;
+            }
+            sayJob() {
+                console.log("the job is:" + this.job);
+            }
+            sayName() {
+                super.sayName(); //super表示父类的原型对象，用于调用父类的方法
+                console.log("the worker1 name is:" + this.name);
+            }
+            static sayAge() {
+                super.sayAge(); //super表示父类，用于调用父类的静态方法（如果父类的方法是静态的，那么在子类调用时也需要在静态的方法内）
+                console.log("the worker1 age");
+            }
+        }
+
+        var worker1 = new Worker1('zll', 18, 'professor');
+        worker1.sayJob(); 
+        //the job is:professor
+        worker1.sayName();
+        //the name is:zll
+        //the worker1 name is:zll
+        Worker1.sayAge()
+        //the person1 age
+        //the worker1 age
+
+    </script>
+</body>
+
+</html>

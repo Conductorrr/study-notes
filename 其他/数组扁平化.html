@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, [3, 4, 5, [6, [7]]], [8, [9, [10]]]]
+
+
+
+        console.log(arr.toString()) // 1,2,3,4,5,6
+        Array.prototype.myFlat1 = function () {
+            return this.toString().split(',').map(item => parseInt(item))
+        }
+        console.log(arr.myFlat1());
+
+
+
+        Array.prototype.myFlat2 = function () { // 这种没有上面直接用toString方便
+            return JSON.stringify(this).replace(/[\[\]]/g, '').split(',').map(item => parseInt(item))
+        }
+        console.log(arr.myFlat2());
+
+
+
+        Array.prototype.myFlat3 = function () {
+            var self = this; //（如果是this，循环里那句就要修改this了，但this是不能修改的，所以新声明一个变量）
+            while (self.some(Array.isArray)) {
+                self = [].concat(...self); // ...self 为 1, 2, [3, 4, 5, [6, [7]]], [8, [9, [10]]] 一次concat只能一层
+            }
+            return self
+        }
+        console.log(arr.myFlat3());
+
+
+
+        Array.prototype.myFlat4 = function () { // 递归
+            var self = this;
+            let res = [],
+            flatMap = (self) => {
+                self.map((element) => {
+                    if (Array.isArray(element)) {
+                        flatMap(element);
+                    } else {
+                        res.push(element);
+                    }
+                })
+            };
+            flatMap(self);
+            return res;
+        }
+        console.log(arr.myFlat4());
+
+
+
+        // 没看到什么可以控制维度的方法，看到一个还是有问题的。。。
+
+    </script>
+</body>
+
+</html>

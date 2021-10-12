@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    {
+      let a1 = Symbol();
+      let a2 = Symbol();
+      console.log(a1 === a2); //false
+      let a3 = Symbol('a3');
+      let a4 = Symbol('a3');
+      console.log(a3 === a4); //false
+      let a5 = Symbol.for('a5');
+      let a6 = Symbol.for('a5');
+      console.log(a5 === a6); //true
+
+      //每一个Symbol值都是独一无二
+      //把Symbol值用于对象的属性名，确保对象属性名的唯一性，防止对象属性名的冲突
+      //(我们希望给某个对象添加一个属性，担心其他同事已经声明过，存在覆盖的可能性。所以把...）
+    }
+
+    {
+      //遍历对象的属性 --- Symbol
+
+      let a1 = Symbol.for('abc');
+      let obj = {
+        [a1]: '123',
+        abc: 345,
+        c: 456
+      };
+      //{abc: 345, c: 456, Symbol(abc): "123"}
+
+      //Object.keys()或者for...in遍历对象会过滤属性名为Symbol值的属性
+
+      Object.getOwnPropertySymbols(obj).forEach(function (item) {//返回一个数组，成员是当前对象的用作属性名的Symbol值。[Symbol(abc)]
+        console.log(obj[item]);
+      })
+      //123
+
+      Reflect.ownKeys(obj).forEach(function (item) {//返回所有属性的“键”组成的数组，包括常规键名和Symbol键名。["abc", "c", Symbol(abc)]
+        console.log('ownkeys', item, obj[item]);
+      })
+      //ownkeys abc 345
+      //ownkeys c 456
+      //ownkeys Symbol(abc) 123
+
+    }
+  </script>
+</body>
+
+</html>

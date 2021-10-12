@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //将字符串中每个单次的第二个字母大写
+        var s = "I have a Dream!"
+
+        function f(str) {
+            var newarr, newarr1 = [];
+            newarr = str.split(" ");
+            for (var i = 0; i < newarr.length; i++) {
+                var s = newarr[i][0];
+                if (newarr[i][1]) {
+                    s = newarr[i][0] + newarr[i][1].toUpperCase()
+                }
+                if (newarr[i][2]) {
+                    s = newarr[i][0] + newarr[i][1].toUpperCase() + newarr[i].substring(2)
+                }
+                newarr1.push(s)
+            }
+            return newarr1.join(' ');
+        }
+        console.log(f(s))
+    </script>
+</body>
+
+</html>

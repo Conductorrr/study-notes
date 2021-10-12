@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>未知宽高元素水平垂直居中</title>
+</head>
+<style>
+    /* 用一个空标签span设置他的vertical-align基准线为中间，并且让他为inline-block，宽度为0
+       也可以使用伪元素来代替span标签（IE不支持此方法） */
+    .parent2 {
+        height: 300px;
+        width: 300px;
+        border: 1px solid #000;
+
+        text-align: center;
+    }
+
+    .parent2 span {
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        vertical-align: middle;
+        zoom: 1;/*BFC*/
+        *display: inline;
+    }
+
+    .parent2 .child {
+        background:red;
+
+        display: inline-block;
+        zoom: 1;/*BFC*/
+        *display: inline;
+    }
+</style>
+
+<body>
+
+    <div class="parent2">
+        <span></span>
+        <div class="child">未知宽高元素水平垂直居中</div>
+    </div>
+
+</body>
+
+</html>

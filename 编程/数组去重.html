@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN];
+
+        function duplicate(arr) {
+            var arr2 = [];
+            var flag = true;
+            for (let i = 0; i < arr.length; i++) {
+                if (arr2.indexOf(arr[i]) == -1) {
+                    if (arr[i] != arr[i]) { //排除NaN!=NaN和{}!={}，但是这里只能排除其中一种啊，但是也ac了   但是一般数组去重也不会让我们考虑NaN的
+                        if (flag) {
+                            arr2.push(arr[i])
+                            flag = false
+                        }
+                    } else {
+                        arr2.push(arr[i])
+                    }
+                }
+            }
+            return arr2;
+        }
+
+        console.log(duplicate(arr));
+
+
+
+
+        // Set + [...set] / Array.from(set)
+        var array = [4, 4, 1, 1, 1, 2, 2, 3]
+        var newArr = [...new Set(array)]
+        var newArr2 = Array.from(new Set(array))
+        console.log(newArr)
+        console.log(newArr2)
+
+
+
+        //删除排序数组中的重复项
+        //不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+
+    </script>
+</body>
+
+</html>

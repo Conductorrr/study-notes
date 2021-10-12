@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //leetcode 903
+
+        var numPermsDISequence = function (S) {
+            var res = 0;
+            var n = S.length;
+            var M = Math.pow(10, 9) + 7;
+
+            var dp = new Array(n + 1);//创建二维数组 法1
+            for (var i = 0; i < n + 1; i++) {
+                dp[i] = new Array();
+            };
+            for (var i = 0; i < n + 1; i++) {
+                for (var j = 0; j < n + 1; j++) {
+                    dp[i][j] = 0
+                }
+            };
+
+            dp[0][0] = 1;
+
+            for (var i = 1; i <= n; ++i) {
+                for (var j = 0; j <= i; ++j) {
+                    if (S.charAt(i - 1) == 'D') {
+                        for (var k = j; k <= i - 1; ++k) {
+                            dp[i][j] = (dp[i][j] + dp[i - 1][k]) % M;
+                        }
+                    } else {
+                        for (var k = 0; k <= j - 1; ++k) {
+                            dp[i][j] = (dp[i][j] + dp[i - 1][k]) % M;
+                        }
+                    }
+                }
+            }
+            for (var i = 0; i <= n; ++i) {
+                res = (res + dp[n][i]) % M;
+            }
+            return res;
+        };
+        console.log(numPermsDISequence("DID"))
+
+
+
+        //创建二维数组 法2
+        var arr = [];
+        for (var i = 0; i < 10; i++) {
+            arr[i] = []; //每行有10列
+            for (var j = 0; j < 10; j++) {
+                arr[i][j] = 1;
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //垃圾解法
+    var str = "13";
+    var num = parseInt(str);
+    function has(num) {
+        var count = 0;
+        for(var i=1;i<=num;i++){
+            var arr = i.toString().split("");
+            for(var j=0;j<arr.length;j++){
+                if(arr[j]=="1"){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    console.log(has(num));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //遍历对象的属性
+
+        var a1 = Symbol.for('abc')
+        let obj = {
+            [a1]: '123',
+            abc: 345,
+            c: 456
+        };
+        console.log(Object.keys(obj)) //返回一个数组，成员是参数对象自身所有可遍历属性的"键"。["abc", "c"]
+        console.log(Object.values(obj)) //返回一个数组，成员是参数对象自身所有可遍历属性的"值"。[345, 456]
+        console.log(Object.entries(obj)) //返回一个数组，成员是参数对象自身所有可遍历属性的"键"、"值组成的数组。[["abc", 345],["c", 456]]
+
+        //会过滤属性名为Symbol值的属性
+    </script>
+</body>
+
+</html>

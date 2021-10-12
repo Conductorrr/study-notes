@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function runAsync1() {
+            var p = new Promise(function (resolve, reject) {
+                //做一些异步操作
+                setTimeout(function () {
+                    console.log('异步任务1执行完成');
+                    resolve('随便什么数据1');
+                }, 1000);
+            });
+            return p;
+        }
+
+        function runAsync2() {
+            var p = new Promise(function (resolve, reject) {
+                //做一些异步操作
+                setTimeout(function () {
+                    console.log('异步任务2执行完成');
+                    resolve('随便什么数据2');
+                }, 1000);
+            });
+            return p;
+        }
+
+        function runAsync3() {
+            var p = new Promise(function (resolve, reject) {
+                //做一些异步操作
+                setTimeout(function () {
+                    console.log('异步任务3执行完成');
+                    resolve('随便什么数据3');
+                }, 1000);
+            });
+            return p;
+        }
+
+        /*
+        all接收一个数组作为参数，数组里都是Promise对象
+        Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例
+        三个异步操作是并行执行的，等到它们都执行完后才会进到then里面
+        p的状态由所有Promise对象决定，分成两种情况：
+        只有所有Promise对象的状态都变成fulfilled，p的状态才会变成fulfilled，此时所有异步操作的结果组成一个数组，作为参数传递给p的回调函数
+        只要有一个Promise对象被rejected，p的状态就变成rejected，此时第一个被reject的实例的结果，会传递给p的回调函数。
+        */
+        var p = Promise.all([runAsync1(),runAsync2(),runAsync3()]);
+        p.then(function (results) {
+            console.log(results)
+        })
+        //异步任务1执行完成
+        //异步任务2执行完成
+        //异步任务3执行完成
+        //["随便什么数据1", "随便什么数据2", "随便什么数据3"]
+        
+        //适用场景：游戏类的素材比较多的应用，打开网页时，预先加载需要用到的各种资源如图片、flash以及各种静态文件。所有的都加载完后，我们再进行页面的初始化
+    </script>
+</body>
+
+</html>

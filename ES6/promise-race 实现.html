@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Promise.all = arr => {
+            let aResult = []; //用于存放每次执行后返回结果
+            return new _Promise(function (resolve, reject) {
+                let i = 0;
+                next(); //开始逐次执行数组中的函数
+                function next() {
+                    arr[i].then(function (res) {
+                        aResult.push(res); //执行后返回的结果放入数组中
+                        i++;
+                        if (i == arr.length) { //如果函数数组中的函数都执行完，便把结果数组传给then
+                            resolve(aResult);
+                        } else {
+                            next();
+                        }
+                    })
+                }
+            })
+        };
+
+        // 里面的function next()看起来像是一个循环，但实际上是一个递归调用，只有数组前一个执行完了，才能执行下一个，如果用循环的话，无法控制下一个的执行。
+
+        // 在这里有一个要点，也是Promise.all本身有的，传进Promise.all的数组元素，必须都是一个Promise对象，否则是无法实现调用的
+    </script>
+</body>
+
+</html>

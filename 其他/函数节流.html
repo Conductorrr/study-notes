@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div">
+        保持它的高度始终等同于宽度
+    </div>
+
+    <script>
+        //原先没有函数节流、函数防抖时
+        // window.onresize = function () {
+        //     var div = document.getElementById('div');
+        //     div.style.height = div.offsetWidth + 'px';
+        // }
+    </script>
+
+    <script>
+        function throttle(fn, content) {
+            clearTimeout(fn.Id)
+            fn.Id = setTimeout(function () {
+                fn.call(content)
+            }, 100)
+        }
+
+        function operation() {
+            // var div = document.getElementById("div");
+            // div.style.height = div.offsetWidth + "px";
+            console.log(1)
+        }
+
+        window.onresize = function () {
+            throttle(operation)
+        }
+        
+    </script>
+</body>
+
+</html>

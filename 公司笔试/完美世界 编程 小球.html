@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>randomBall</title>
+    <script>
+        window.onload=function(){
+            function fff() {
+                var box=document.getElementById("box");
+                var ball=document.getElementById("ball");
+                //定义小球初始top和left值
+                var ballX=(box.offsetWidth-ball.offsetWidth)*Math.random();
+                var ballY=(box.offsetHeight-ball.offsetHeight)*Math.random();
+                ball.style.left=ballX+'px';
+                ball.style.top=ballY+'px';
+                //定义小球速度
+                var speed=1;
+                var theta=2*Math.PI*Math.random();
+                var speedX=speed*Math.cos(theta);
+                var speedY=speed*Math.sin(theta);
+                setInterval(function(){
+                    //更新小球当前坐标
+                    ballX+=speedX;
+                    ballY+=speedY;
+                    //如果小球出界了，速度反向
+                    if(ballX+ball.offsetWidth>=box.offsetWidth||ballX<=0){
+                        speedX=-speedX;
+                    }
+                    if(ballY+ball.offsetHeight>=box.offsetHeight||ballY<=0){
+                        speedY=-speedY;
+                    }
+                    ball.style.left=ballX+'px';
+                    ball.style.top=ballY+'px';;
+                },10)
+            }
+            fff()
+        }
+    </script>
+</head>
+<body>
+<div id="box" style="width:1000px;height:1000px;position:relative;overflow: hidden;border:1px solid black;">
+<div id="ball" style="width: 10px;height: 10px;border-radius: 5px;position:absolute;background:red;"></div>
+</div>
+</body>
+</html>

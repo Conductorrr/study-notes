@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="example"></div>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script>
+        //以下代码输出几个1，答1个-----computed的特性
+        var vm = new Vue({
+            el: '#example',
+            data: {
+                message: 'Hello'
+            },
+            computed: {
+                test: function () {
+                    console.log(1)
+                    return this.message
+                }
+            },
+            created: function () {
+                this.message = "World"
+                for (var i = 0; i < 5; i++) {
+                    console.log(this.test)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

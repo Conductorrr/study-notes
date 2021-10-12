@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 执行顺序
+
+    // setTimeout(function () {
+    //   console.log('0');
+    // }, 0)
+    // let promise = new Promise(function (resolve, reject) {
+    //   console.log('1');
+    //   resolve(3);
+    //   console.log('2');
+    // });
+
+    // promise.then(function (value) {
+    //   console.log(value);
+    // });
+    // console.log('Hi!');
+
+    // 输出结果 1 2 hi 3 0       
+    
+    /*
+    主线程中的东西new Promise、Hi， setTimeout被放入宏任务队列，执行new Promise碰到resolve会把resolve放入微任务队列
+    会先等主线程中的任务执行完（1 2 Hi）才会执行微任务队列中的东西（promise.then那块），再宏任务队列中取一个执行
+    */
+
+
+
+
+
+    async function async1() {
+      console.log('async1 start')
+      await async2()
+      console.log('async1 end')
+    }
+    async function async2() {
+      console.log('async2')
+    }
+    console.log('script start')
+    setTimeout(function () {
+      console.log('settimeout')
+    })
+    async1()
+    new Promise(function (resolve) {
+      console.log('promise1')
+      resolve()
+    }).then(function () {
+      console.log('promise2')
+    })
+    console.log('script end')
+
+    // 输出结果：
+    // script start
+    // async1 start
+    // async2
+    // promise1
+    // script end
+    // async1 end
+    // promise2
+    // settimeout
+
+    /*
+    知识点1：
+    await会使async函数暂停执行，暂停执行等待表达式中的Promise解析完成，然后将await下面的代码加入到微任务队列中，然后就会跳出整个async函数来执行后面的代码。
+    （这边就是执行async2函数，然后执行async2函数后面的，再回到async1中）
+    
+
+    知识点2：
+    new Promise执行到resolve时会将resolve这个任务放入微任务队列
+    async函数会返回一个promise对象，也会被放入到微任务队列中
+    await async2()下面的代码会被放入微任务队列
+    */
+
+
+
+
+
+    // Promise 的链式 then() 是怎样执行的？
+
+    // new Promise((r) => {
+    //   r();
+    // })
+    // .then(() => console.log(1))
+    // .then(() => console.log(2))
+    // .then(() => console.log(3))
+
+    // new Promise((r) => {
+    //   r();
+    // })
+    // .then(() => console.log(4))
+    // .then(() => console.log(5))
+    // .then(() => console.log(6))
+
+    // 结果 1 4 2 5 3 6
+
+    /*
+    1.Promise 多个then()链式调用，并不是连续的创建了多个微任务并推入微任务队列，因为then()的返回值必然是一个 Promise，
+    而后续的then()是上一步then()返回的 Promise 的回调
+    2.传入 Promise 构造器的执行器函数内部的同步代码执行到resolve()，将 Promise 的状态改变为<resolved>: undefined, 
+    然后 then 中传入的回调函数console.log('1')作为一个微任务被推入微任务队列
+    3.第二个then()中传入的回调函数console.log('2')此时还没有被推入微任务队列，只有上一个then()中的console.log('1')执行完毕后，
+    console.log('2')才会被推入微任务队列
+    */
+
+
+
+
+
+    //.then 或者 .catch 的参数期望是函数，传入非函数则会发生值穿透。
+
+    // Promise.resolve(1)
+    //   .then(2)
+    //   .then(Promise.resolve(3))
+    //   .then(console.log) //1
+
+
+    // Promise.resolve(1)
+    //   .then(function () {
+    //     return 2
+    //   })
+    //   .then(Promise.resolve(3))
+    //   .then(console.log) //2
+
+
+    // Promise.resolve(1)
+    //   .then(function () {
+    //     return 2
+    //   })
+    //   .then(function () {
+    //     return Promise.resolve(3)
+    //   })
+    //   .then(console.log) //3
+  </script>
+</body>
+
+</html>

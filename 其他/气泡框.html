@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .demo {
+            width: 260px;
+            height: 100px;
+            border: 10px solid #abc;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .demo span { /*下面多个小三角*/
+            position: absolute;
+            left: 60px;
+            bottom: -50px;
+            border: 20px solid transparent;
+            border-top-color: #abc
+        }
+
+        .demo strong { /*再搞个白色小三角*/
+            position: absolute;
+            left: 60px;
+            bottom: -40px;
+            border: 20px solid transparent;
+            border-top-color: white
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo">
+        <span></span>
+        <strong></strong>
+    </div>
+</body>
+
+</html>

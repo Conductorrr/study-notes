@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //翻转数组：原地修改输入数组、使用 O(1) 的额外空间
+
+        var s = ["h", "e", "l", "l", "o"]
+        var reverseString = function (s) {//使用O(1) 的额外空间
+            var left = 0,
+                right = s.length - 1;
+            temp = "";
+            while (left < right) {
+                temp = s[right]
+                s[right] = s[left]
+                s[left] = temp;
+                left++;
+                right--;
+            }
+            return s;
+        };
+        var reverseString2 = function (s) {//双指针，对撞指针
+            var left = 0,
+                right = s.length - 1;
+            while (left < right) {
+                [s[left],s[right]] = [s[right],s[left]];
+                left++;
+                right--;
+            }
+            return s;
+        };
+        console.log(reverseString2(s))
+
+    </script>
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [0, 1, 2]
+        arr[10] = 10;
+        var newArr = arr.filter(function (x) {
+            return x === undefined;
+        })
+        console.log(newArr) //[]
+        console.log(arr)
+        console.log(arr[5])
+
+
+
+        console.log('5' + 3)
+        console.log('5' - 3)
+
+
+
+        var array = new Array(5)
+        array[1] = 1
+        array[5] = 2
+        console.log(array.length);
+
+
+
+        (function (x) {
+            return (function (y) {
+                console.log(x);
+            })(2)
+        })(3);
+
+
+
+        pi = 0;
+        radius = 1
+        function ccc(radius) {
+            radius = 3;
+            pi = 3.14;
+            console.log(2 * pi * radius);
+        }
+        ccc(2);
+    </script>
+</body>
+
+</html>

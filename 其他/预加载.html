@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    1)预加载：
+    提前加载图片，当用户需要查看时可直接从本地缓存中渲染。
+
+    2)为什么要用预加载？优点？
+    在网页全部加载之前，对一些主要内容进行加载，以提供给用户更好的体验，减少等待的时间。否则，如果一个页面的内容过于庞大，
+    没有使用预加载技术的页面就会长时间的展现为一片空白，直到所有内容加载完毕。
+    预加载可以说是牺牲服务器前端性能，换取更好的用户体验，这样可以使用户的操作得到最快的反映。
+    
+    3)实现方式：
+
+    1.使用HTML标签
+    <img src="http://pic26.nipic.com/20121213/6168183 0044449030002.jpg" style="display:none" />
+
+    2.使用Image对象
+    常用的是new Image();设置其src来实现预载，再使用onload方法回调预载完成事件。只要浏览器把图片下载到本地，同样的src就
+    会使用缓存，这是最基本也是最实用的预载方法。当Image下载完图片头后，会得到宽和高，因此可以在预载前得到图片的大小(方法是
+    用记时器轮循宽高变化)。
+    <script>
+        //myPreload.js文件
+        var image = new Image()
+        image.src = "http://pic26.nipic.com/20121213/6168183 004444903000 2.jpg"
+    </script>
+
+    3.使用Ajax实现预加载。虽然存在跨域问题，但会精细控制预加载过程
+    <script>
+        var xmlhttprequest = new XMLHttpRequest();
+        xmlhttprequest.onreadystatechange = callback;
+        xmlhttprequest.onprogress = progressCallback;
+        xmlhttprequest.open("GET", "http://image.baidu.com/mouse,jpg", true);
+        xmlhttprequest.send();
+
+        function callback() {
+            if (xmlhttprequest.readyState == 4 && xmlhttprequest.status == 200) {
+                var responseText = xmlhttprequest.responseText;
+            } else {
+                console.log("Request was unsuccessful:" + xmlhttprequest.status);
+            }
+        }
+
+        function progressCallback(e) {
+            e = e || event;
+            if (e.lengthComputable) {
+                console.log("Received" + e.loaded + "of" + e.total + "bytes")
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //全排列 leetcode46
+
+        function T46(nums) {
+            var left = [];
+            if (nums.length == 0) return [
+                []
+            ];
+            if (nums.length == 1) return [
+                [nums[0]]
+            ];
+            left.push([nums[0], nums[1]]);
+            left.push([nums[1], nums[0]]);
+            //从2位数字开始，遍历结果集，依次在数组下标位置插入后一位数字，这就是阶乘
+            for (var size = 3; size <= nums.length; size++) {
+                var right = [];
+                //遍历较大的left集合，并把新值转移到right，结束后交换
+                for (var i = 0; i < left.length; i++) {
+                    var list_i = left[i];
+                    for (var j = 0; j < size; j++) {
+                        var list_j = list_i.slice(0);
+                        //在原数组的下标位置插入数组第size个数
+                        list_j.splice(j, 0, nums[size - 1]);
+                        right.push(list_j);
+                    }
+                }
+                left = right;
+            }
+            return left;
+        }
+        console.log(T46([1, 2, 3]))
+
+        // const permute = (nums) => {
+        //     let result = [
+        //             [nums[0]]
+        //         ],
+        //         j = undefined,
+        //         arr = []
+        //     for (let i = 1; i < nums.length; i++) { // 不断插入新的排列数
+        //         arr = [] // 将临时变量置空
+        //         result.forEach((value) => {
+        //             value.push(nums[i]) // 对上一次的全排列都插入新的排列数
+        //             // arr.push(JSON.parse(JSON.stringify(value)))
+        //             arr.push([...value])
+        //             j = value.length - 1
+        //             while (j > 0) { // 将新排列数插入到不同位置
+        //                 [value[j - 1], value[j]] = [value[j], value[j - 1]]
+        //                 // arr.push(JSON.parse(JSON.stringify(value)))
+        //                 arr.push([...value])
+        //                 j--
+        //             }
+        //         })
+        //         result = arr
+        //     }
+        //     return result
+        // }
+
+        // console.log(permute([1, 2, 3]))
+    </script>
+</body>
+
+</html>

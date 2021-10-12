@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。
+
+        function Event() {
+            this.handlers = {};
+        }
+
+        Event.prototype = {
+            // 订阅事件
+            on: function (eventType, handler) {
+                var self = this;
+                if (!(eventType in self.handlers)) {
+                    self.handlers[eventType] = [];
+                }
+                self.handlers[eventType].push(handler);
+                return this;
+            },
+            // 发布事件
+            emit: function (eventType) {
+                var self = this;
+                var handlerArgs = Array.prototype.slice.call(arguments, 1);
+                for (var i = 0; i < self.handlers[eventType].length; i++) {
+                    self.handlers[eventType][i].apply(self, handlerArgs);
+                }
+                return self;
+            },
+            // 删除订阅事件
+            off: function (eventType, handler) {
+                var currentEvent = this.handlers[eventType];
+                var len = 0;
+                if (currentEvent) {
+                    len = currentEvent.length;
+                    for (var i = len - 1; i >= 0; i--) {
+                        if (currentEvent[i] === handler) {
+                            currentEvent.splice(i, 1);
+                        }
+                    }
+                }
+                return this;
+            }
+        };
+
+        let publisher = new Event();
+        
+        //订阅事件a
+        let sub1 = function (e) {
+            console.log(1 + e);
+        }
+        let sub2 = function (e) {
+            console.log(2 + e);
+        }
+        publisher.on('a', sub1);
+        publisher.on('a', sub2);
+
+        //发布事件a
+        publisher.emit('a', '调用啦啦啦');
+
+        //取消订阅事件a
+        publisher.off('a',sub1)
+        publisher.emit('a', '调用啦啦啦');
+
+        /*订阅者sub1和订阅者sub2分别订阅了事件'a'，当发布者publisher.emit发布主题的时候，sub1和sub2 
+        均收到了消息，在控制台输出  1调用  2调用。
+        然后，订阅者sub1又取订了'a'，所以当发布者publisher.emit再次发布主题的时候，只有sub2才收到相关消息*/
+    </script>
+</body>
+
+</html>

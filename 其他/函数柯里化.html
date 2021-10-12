@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 函数柯里化经典面试题
+        // 实现一个add方法，使计算结果能够满足如下预期：
+        // add(1)(2)(3) = 6
+        // add(1, 2, 3)(4) = 10
+        // add(1)(2)(3)(4)(5) = 15
+        // add(2,6)(1) = 9
+
+        function add() {
+            var _args = [...arguments] // 第一次执行时，定义一个数组专门用来存储所有的参数
+
+            function _add() { // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+                _args.push(...arguments)
+                return _add
+            }
+
+            _add.toString = function () { // 利用toString隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+                return _args.reduce(function (prev, value) {
+                    return prev + value
+                })
+            }
+
+            return _add
+        }
+
+        console.log(add(1)(2)(3)) // 6
+        console.log(add(1, 2, 3)(4)) // 10
+        console.log(add(1)(2)(3)(4)(5)) // 15
+        console.log(add(2, 6)(1)) //9
+
+
+
+
+        // 函数柯里化是指，函数A经过柯里化通用函数(假设叫createCurry)转化之后得到一个柯里化函数_A，能够处理函数A的剩余参数
+
+        // 柯里化通用函数是指这样一个函数(假设叫createCurry)，他接收函数A作为参数，运行后能够返回一个新的函数，叫柯里化函数，
+        // 能够处理函数A的剩余参数。
+
+        function add2(x, y, z) {
+            return x + y + z
+        }
+
+        //柯里化通用函数
+        function createCurry(func, args) { //args第一次调用也没什么用，主要是后面递归用的
+            var len = func.length;
+            var args = args || [];
+            return function () {
+                var _args = [...arguments];
+                _args.push(...args);
+                if (_args.length < len) { // 如果参数个数小于最初的func.length，则递归调用，继续收集参数
+                    return createCurry.call(this, func, _args);//这里不用call也行啊
+                }
+                return func.apply(this, _args); // 参数收集完毕，则执行func
+            }
+        }
+
+        var curryingAdd = createCurry(add2)
+        //以下结果等价
+        console.log(curryingAdd(1, 2, 3)) //6
+        console.log(curryingAdd(1)(2, 3)) //6
+        console.log(curryingAdd(1, 2)(3)) //6
+        console.log(curryingAdd(1)(2)(3)) //6
+        console.log(add2(1, 2, 3)) //6
+
+
+
+
+        // Currying有哪些好处?
+        // 柯里化使函数参数拥有了更多的自由度。柯里化能够应对更加复杂的逻辑封装。
+        // 参数复用、提前确认、延迟运行（bind实现的机制就是Currying）
+
+        Function.prototype.bind = function (context) {
+            var _this = this
+            var args = Array.prototype.slice.call(arguments, 1)
+        
+            return function() {
+                return _this.apply(context, args)
+            }
+        }
+
+        // 柯里化的一些性能问题你只要知道下面四点就差不多了：
+        // 1.存取arguments对象通常要比存取命名参数要慢一点
+        // 2.一些老版本的浏览器在arguments.length的实现上是相当慢的
+        // 3.使用fn.apply( … ) 和 fn.call( … )通常比直接调用fn( … ) 稍微慢点
+        // 4.递归与闭包会带来花销，无论是在内存还是速度上
+        // 因此柯里化的自由度是以牺牲了一定的性能为代价换来的。
+        // 不过，在大部分应用中，主要的性能瓶颈是在操作DOM节点上，柯里化的性能损耗基本是可以忽略不计的。
+    </script>
+</body>
+
+</html>

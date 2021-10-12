@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex;">
+        <span style="float: right;">1</span>
+        <span style="float: right;">2</span>
+        <span style="float: right;">3</span>
+    </div>
+
+    
+    <script>
+    
+    var reg = /^[^ab][cd]e$/;
+    console.log(reg.test('ace'))
+    console.log(reg.test('de'))
+    console.log(reg.test('abcde'))
+    console.log(reg.test('cde'))
+
+    var reg2 = /^[^a][bc]\de/;
+    console.log(reg.test('ac\de'))
+    console.log(reg.test('bc1e'))
+    console.log(reg.test('bc1ef'))
+    console.log(reg.test('db1efg'))
+
+
+    console.log(typeof null === 'object')
+
+
+    var a = 1 +'1'
+    var b = true + true 
+    var c = 4 + [1,2,3]
+    console.log(a,b,c)
+
+    var o = {a:1}
+    Object.defineProperty(o,"b",{value:2,writable:false,enumerable:false,configurable:true})
+    o.a=2
+    o.b=3
+    console.log(o.a,o.b)
+
+    console.log(true ||true && false)
+    console.log(true &&true && false)
+    console.log(true &&false || false)
+    console.log(false &&true && true)
+
+    function Test(name){
+
+    }
+    Test.name = 'tom'
+    Test.prototype.name = 'john'
+    var resule = (new Test('JK')).name
+    console.log(resule)
+    </script>
+</body>
+</html>

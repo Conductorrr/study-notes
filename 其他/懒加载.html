@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lazyload</title>
+    <style>
+        .image-item {
+            display: block;
+            margin-bottom: 50px;
+            height: 200px; /*一定记得设置图片高度*/
+        }
+    </style>
+</head>
+
+<body>
+    
+    懒加载（延迟加载）（定义参考实现方式）
+    1)为什么要用懒加载？优点？
+    减少无效资源的加载，这样能明显减少服务器的压力，节约流量，也能够减小浏览器的负担。
+    防止并发加载的资源过多会阻塞js的加载，影响网站的正常使用。
+    能提升用户的体验
+    2)实现方式：
+    1.第一种是纯粹的延迟加载，使用setTimeOut或setInterval进行加载延迟. 
+    2.第二种是条件加载，符合某些条件，或触发了某些事件才开始异步下载。 
+    3.第三种是可视区加载，即仅加载用户可以看到的区域，这个主要由监控滚动条来实现，一般会在距用户看到某图片前一定距离遍开始
+      加载，这样能保证用户拉下时正好能看到图片。
+    
+    具体实现步骤和代码：
+    首先将图片的src属性设为空字符串，而图片的真实路径则设置在自定义属性data-original中，当页面滚动的时候需要去监听
+    scroll事件，在scroll事件的回调中，判断懒加载的图片是否进入可视区域，如果图片在可视区内将图片的src属性设置为
+    data-original的值，这样就可以实现懒加载。
+
+    <img src="" class="image-item" lazyload="true" data-original="images/1.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/2.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/3.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/4.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/5.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/6.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/1 copy.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/2 copy.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/3 copy.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/4 copy.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/5 copy.jpg" />
+    <img src="" class="image-item" lazyload="true" data-original="images/6 copy.jpg" />
+
+    <script>
+        var viewHeight = document.documentElement.clientHeight //获取可视区高度
+        function lazyload() {
+            var eles = document.querySelectorAll('img[data-original][lazyload]')
+            eles.forEach(function (item, index) {
+                var rect
+                if (item.dataset.original === "") return
+                rect = item.getBoundingClientRect() // 用于获得页面中某个元素的左，上，右和下分别相对浏览器视窗的位置
+                if (rect.bottom >= 0 && rect.top < viewHeight) { //没懂bottom>=0什么用
+                    ! function () {
+                        var img = new Image()
+                        img.src = item.dataset.original
+                        img.onload = function () {
+                            item.src = img.src
+                        }
+                        item.removeAttribute("data-original") //移除属性，下次不再遍历
+                        item.removeAttribute("lazyload")
+                    }()
+                }
+            })
+        }
+        lazyload() //刚开始还没滚动屏幕时，要先触发一次函数，初始化首页的页面图片
+        document.addEventListener("scroll",lazyload)
+    </script>
+</body>
+
+</html>
