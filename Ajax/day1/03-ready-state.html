@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>readyState状态变化</title>
+</head>
+<body>
+  <script>
+
+    var xhr = new XMLHttpRequest()
+    console.log(xhr.readyState)
+    // => 0
+    // 创建XMLHttpRequest对象
+
+    xhr.open('GET', 'time.php')
+    console.log(xhr.readyState)
+    // => 1
+    // open方法已经调用，与服务器端口建立连接
+
+    xhr.send()  
+    //=> 1 
+
+    xhr.addEventListener('readystatechange', function () {
+      switch (this.readyState) {
+        case 2:
+          // => 2
+          // send方法已经被调用，并且已经接受到了响应报文的状态行和响应头
+
+          // 可以拿到头
+          // console.log(this.getAllResponseHeaders())  //获取全部相应头
+          console.log(this.getResponseHeader('server')) //获取指定相应头
+          // 但是还没有拿到体
+          console.log(this.responseText)
+          break
+
+        case 3:
+          // => 3
+          // 正在下载响应报文的响应体
+          // 下载中响应体有可能为空，也有可能不完整，所以在这里处理响应体不保险（不可靠）
+          console.log(this.responseText)
+          break
+
+        case 4:
+          // => 4
+          // 一切 OK （整个响应报文已经完整下载下来了）
+          console.log(this.responseText)
+          break
+      }
+    })
+
+  </script>
+</body>
+</html>

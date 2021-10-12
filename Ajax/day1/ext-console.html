@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    //Chrome中控制台展开被打印的对象时会访问即时的数据
+
+    var obj = { foo: 123 }
+
+    console.log(obj)
+
+    setTimeout(function () {
+      obj.foo = 456
+      console.log(obj)
+    }, 3000)
+  </script>
+</body>
+</html>

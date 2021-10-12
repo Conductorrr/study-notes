@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        /* 开发人员可以为自己的网页指定特殊的字体，无需考虑用户电脑上是否安装了此特殊字体 */
+
+        @font-face { /* 声明字体 */
+            font-family: 'shuangyuan'; /* 给我们声明的字体起名字 */
+            src: url('../fonts/webfont.eot'); /* IE9*/
+            src: url('../fonts/webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('../fonts/webfont.woff') format('woff'), /* chrome、firefox */
+            url('../fonts/webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url('../fonts/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
+
+            /* 复制粘贴完@font-face注意里面的路径可能要改 */
+
+        }
+        .myFont{
+            font-family: shuangyuan;
+        }
+           
+    </style>
+</head>
+<body>
+<!-- 制作字体的网站只对我们输入的那些字生成字体，所以其他字用这个shuangyuan字体没效果的 -->
+<span class="myFont">开发人员可以为自已的网页指定特殊的字体，无需考虑用户电脑上是否安装了此特殊字体，
+    从此把特殊字体处理成图片的时代便成为了过去。它的支持程度比较好，甚至IE低版本浏览器也能支持</span>
+</body>
+</html>

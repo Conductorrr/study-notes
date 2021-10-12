@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>尝试找到一种可以发送跨域请求的方式</title>
+</head>
+<body>
+  <!-- <img src="http://ww1.sinaimg.cn/large/006ThXL5ly1fj8w5i2onyj302u02umwz.jpg" alt=""> -->
+  <script>
+
+    // 不同源地址之间的请求我们称之为跨域请求
+
+    // 现在我们知道的能发送请求的方式有 img link script iframe(在页面中挖一个坑载入另外一个页面，和ajax的局部页面刷新差不多，只不过前者是浏览器提供的方法，后者是我们自己写的)
+    
+    // 校验目标：1 能发出去，2 能收回来
+
+    // ## 1. img
+    // 可以发送不同源地址之间的请求
+    // 发送了请求，服务端也确实给我们响应了，但无法拿到响应结果(看不到响应体)，因为我们用img去请求这个地址浏览器会认为这是个图片，会按二进制去理解里面的内容，但实际返回的是个字符串，所以...    
+    // var img = new Image()
+    // img.src = 'http://locally.uieee.com/categories'
+
+    // ## 2. link
+    // 可以发送不同源地址之间的请求
+    // 无法拿到响应结果
+    // var link = document.createElement('link')
+    // link.rel = 'stylesheet'
+    // link.href = 'http://locally.uieee.com/categories'
+    // document.body.appendChild(link)
+
+    // 以上都无法拿到链入的文档中的内容
+
+    // ## 3. script
+    //（出于安全考虑，服务器不允许ajax跨域获取数据。但是我们可以借助script标记跨域获取文件内容）
+    // 可以发送不同源地址之间的请求     （src指向的外部资源内容会放到当前文档script标签的位置）
+    // 无法拿到响应结果
+    // 借助于能够作为 JS 执行
+    var script = document.createElement('script')
+    script.src = 'http://ajaxday1.io/time2.php'
+    document.body.appendChild(script) // 开始发起请求   异步
+    
+    function foo (res) {
+      console.log(res)
+    }
+
+    // 不同源地址之间请求必须服务端和客户端配合才能完成
+
+  </script>
+</body>
+</html>

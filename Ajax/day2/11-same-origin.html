@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>同源策略</title>
+</head>
+<body>
+  <script src="jquery.js"></script>
+  <script>
+
+    // 同源是指协议，域名，端口完全相同 
+
+    // 同源策略，是浏览器的一种安全策略，只有同源的地址才可以相互通过AJAX的方式请求
+
+    // 尝试对一个不同源地址发起一个AJAX请求（失败了）（请求其实发出去了，但拿不到东西）
+    $.get('http://locally.uieee.com/categories', function (res) {
+      console.log(res)
+    }) //报错
+
+    // 不同源地址之间的请求我们称之为跨域请求
+
+  </script>
+</body>
+</html>

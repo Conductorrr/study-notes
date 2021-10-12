@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX 的快速上手（接收响应）</title>
+</head>
+<body>
+  <script>
+
+    /*
+    在此之前，我们可以通过以下几种方式让浏览器发出对服务端的请求，获得服务端的数据:
+      地址栏输入地址，回车，刷新 
+      特定元素的 href 或 src 属性 
+      表单提交
+    这些方案都是我们无法通过或者很难通过代码的方式对服务端发出请求
+    AJAX使我们可以通过JS代码直接发送网络请求，获取服务端最新的内容而不必重新加载页面
+    */
+
+
+
+    var xhr = new XMLHttpRequest()
+
+    //如果需要捕获第1个状态的变化，需要注意代码执行顺序的问题（不要出现来不及的情况）
+    // xhr.onreadystatechange = function () {
+    //   // 这个事件并不是只在响应时触发，而是XHR状态改变就触发
+    //   console.log(this.readyState)
+    // }
+
+    xhr.open('GET', './time.php')
+
+    xhr.send()
+    
+    xhr.onreadystatechange = function () {// 这个事件并不是只在响应时触发，而是XHR状态改变就触发
+      if (this.readyState !== 4) return
+      console.log(this.responseText)// 获取响应体
+    }
+    
+
+    /*
+     Ajax的请求过程：
+    （1）创建 XMLHttpRequest 对象，也就是创建一个异步调用对象；
+    （2）调用open方法，并指定该 HTTP 请求的方式、 URL 以及验证信息，（以）创建一个新的 HTTP 请求（与服务器端口建立连接）
+    （3）设置响应 HTTP 请求状态变化的函数；
+    （4）发送 HTTP 请求；
+    （5）获取异步调用返回的数据；
+    （6）使用 JavaScript 和 DOM 实现局部刷新。
+    */
+
+  </script>
+</body>
+</html>

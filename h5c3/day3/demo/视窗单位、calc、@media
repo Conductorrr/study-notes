@@ -1,0 +1,55 @@
+视窗单位（css3新单位，也是相对单位）
+vw 视窗宽度的百分比
+vh 视窗高度的百分比
+vmin 当前vw和vh中较小的一个值
+vmax 当前vw和vh中较大的一个值
+
+应用，如弹出框的大小根据内容的大小自适应，视窗单位处理可以设置元素的宽高width: 80vw;（宽度80％）；
+还可以使用vw设置字体大小来实现响应式文字，font-size: 5vw;（字体5％）；
+做移动页面开发时，如果使用vw、wh设置字体大小（比如 5vw），在竖屏和横屏状态下显示的字体大小是不一样的，
+这里就可以用到vmin和vmax，使得文字大小在横竖屏下保持一致。
+
+
+
+
+CSS的calc()函数：给元素的width、border、margin、pading、font-size等属性，动态计算值
+支持 "+", "-", "*", "/" 运算，运算符前后都要带空格
+
+
+
+
+利用@media（媒体查询）实现网页布局的自适应（响应式布局）：
+1、有一些配置和兼容性要处理，如设置meta标签
+2、使用@media
+@media (max-width: 1300px) { 当页面小于1300px的时候执行它下面的CSS
+    .analysis-item {
+        width: calc((100% - 20px) / 3);
+    }
+}
+@media (min-width: 1301px) and (max-width: 1600px) { 当页面大于1301、小于1600px的时候执行它下面的CSS
+    .analysis-item {
+        width: calc((100% - 60px) / 4);
+
+        &:nth-child(4) {
+        margin-top: 0px;
+        }
+
+        &:nth-child(3n+1) {
+        margin-left: 20px;
+        }
+
+        &:nth-child(4n+1) {
+        margin-left: 0px;
+        }
+    }
+}
+@media (min-width: 1601px) { 当页面大于1601px的时候执行它下面的CSS
+    
+}
+
+不用@media用js脚本的方式写（监听resize事件），更简单一点吧，米哈游面试官说的
+
+
+
+
+以上，都可以用来实现响应式布局、屏幕适配

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* 伪元素first-letter：获取第一个字符 */
+        p::first-letter{
+            color: red;
+            font-size: 30px;
+            float: left; 
+            /*浮动框旁边的行框被缩短，从而给浮动框留出空间，行框围绕浮动框。所以创建浮动可以实现文字环绕(首字下沉)*/
+        }
+
+        /*伪元素first-line：获取第一行内容。    如果设置了::first-letter,那么无法同时设置它的样式*/
+        p::first-line{
+            text-decoration: underline;
+        }
+
+        /*伪元素selection：设置当前选中内容的样式*/
+        p::selection{
+            background-color: pink;
+            color: red;
+            /*它只能设置显示的样式，而不能设置内容大小*/
+            /*font-size: 30px;*/
+        }
+
+        /*伪元素::placeholder：可以选择一个表单元素的占位文本*/
+    </style>
+</head>
+<body>
+<p>眉毛上的汗水和眉毛下的泪水，你必须选择一样<br>你不努力，活该生活在社会的最底层你不努力，活该生活在社会的最底层你不努力，
+    活该生活在社会的最底层你不努力，活该生活在社会的最底层你不努力，活该生活在社会的最底层你不努力，活该生活在社会的最底层
+    你不努力，活该生活在社会的最底层你不努力，活该生活在社会的最底层你不努力，活该生活在社会的最底层你不努力，活该生活在社
+    会的最底层你不努力，活该生活在社会的最底层你不努力，活该生活在社会的最底层v</p>
+</body>
+</html>

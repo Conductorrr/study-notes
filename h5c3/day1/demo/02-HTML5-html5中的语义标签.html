@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        header{
+             width: 100%;
+             height: 100px;
+             background-color: red;
+         }
+        nav{
+            width: 100%;
+            height: 36px;
+            background-color: green;
+        }
+        main{
+            width: 100%;
+            height: 500px;
+            background-color: #ccc;
+        }
+        main > article{
+            width: 80%;
+            height: 100%;
+            background-color: purple;
+            float: left;
+        }
+        main > aside{
+            width: 20%;
+            height: 100%;
+            background-color: pink;
+            float: right;
+        }
+        footer{
+            width: 100%;
+            height: 80px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+
+<header>头部</header>
+<nav>导航</nav>
+<main>
+    <article>左边</article>
+    <aside>右边</aside>
+</main>
+<footer>底部</footer>
+
+<!--<div class="header"></div>
+<div class="nav"></div>
+<div class="mainContent">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+<div class="footer"></div>-->
+
+</body>
+</html>
+
+<!--   
+
+什么是html语义化？
+就是(可以使用header、main、footer等语义化标签，)让页面内容的结构更加清晰，让大家都能理解看懂，包括开发人员，搜索引擎把虫，盲人阅读器、移动设备
+
+具体讲html语义化好处：
+去掉样式后页面内容的结构还是清晰的
+让阅读源代码的人更容易理解，更容易将网站分块，便于团队开发和维护
+让搜索引擎更好地理解页面，有利于SEO
+让(如屏幕阅读器、盲人阅读器、移动设备等)设备更方便地解析
+
+（语义化标签除了上面的，不要忘了还有h1，ul，li之类的）
+ -->

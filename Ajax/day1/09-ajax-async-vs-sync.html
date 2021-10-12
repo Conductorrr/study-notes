@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>同步模式和异步模式</title>
+</head>
+<body>
+  <script>
+
+    // console.time('abc') //console.time()测试程序执行的时长,abc是计时器的名字
+    // for (var i = 0; i < 100000000; i++) {}
+    // console.timeEnd('abc')
+
+    // 同步模式：一定要等send执行完才执行下一步
+    var xhrSync = new XMLHttpRequest()
+    xhrSync.open('GET', 'time.php', false) // open方法的第三个参数是 async 可以传入一个布尔值，默认为 true
+    console.time('sync')
+    xhrSync.send()
+    console.log(xhrSync.responseText) //拿到了数据
+    console.timeEnd('sync')
+
+    // 异步模式：send执行的过程中会去执行下面的步骤
+    var xhrAsync = new XMLHttpRequest()
+    xhrAsync.open('GET', 'time.php', true) // open方法的第三个参数是 async 可以传入一个布尔值，默认为 true
+    console.time('async')
+    xhrAsync.send()
+    console.log(xhrAsync.responseText) //拿不到数据
+    console.timeEnd('async')
+
+  </script>
+</body>
+</html>

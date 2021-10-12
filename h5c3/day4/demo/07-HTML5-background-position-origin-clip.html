@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        /*提升移动端响应区域的大小*/
+        a{
+            width: 50px;
+            height: 50px;
+            display: block;
+            background-color: #ddd;
+            margin:100px auto;
+            box-sizing: border-box;
+            
+            background-image: url("../images/sprites.png");
+            /*设置背景的偏移，参照背景的坐标原点(background-origin)。背景的坐标原点默认在容器的左上角*/
+            background-position: -20px 0;
+
+            /*添加padding*/
+            padding:14px;
+
+            /*background-origin:设置背景的坐标原点
+                border-box:从border的位置开始填充背景，会与border重叠
+                padding-box:从padding的位置开始填充背景，会与padding重叠
+                content-box:从内容的位置开始填充背景*/
+            background-origin: content-box;
+
+            /*background-clip:设置背景内容的裁切
+                border-box:显示border及以内的内容
+                padding-box:显示padding及以内的内容
+                content-box:显示content及以内的内容*/
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+<a href=""></a>
+</body>
+</html>

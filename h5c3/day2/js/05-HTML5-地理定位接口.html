@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .de{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<div id="demo" class="de"></div>
+<script>
+    var x=document.getElementById("demo");
+    function getLocation()
+    {
+        /*能力测试*/
+        if (navigator.geolocation)
+        {
+            /*navigator.geolocation.getCurrentPosition(success,error,option);
+            * 1.获取地理信息成功会调用success,并返回一个包含位置信息的对象position
+            * 2.获取地理信息失败会调用error,并返回错误信息对象error
+            * 3.option:是个对象,可以设置获取数据的方式
+            *     enableHighAccuracy:true/false:是否使用高精度
+            *     timeout:设置超时时间，单位ms
+            *     maximumAge:可以设置浏览器重新获取地理信息的时间间隔，单位是ms*/
+            navigator.geolocation.getCurrentPosition(showPosition,showError,{
+                /*enableHighAccuracy:true,
+                timeout:3000*/
+            });
+        }
+        else{
+            x.innerHTML="Geolocation is not supported by this browser.";
+        }
+    }
+    
+    /*如果获取地理信息成功，会将获取到的地理信息传递给成功之后的回调*/
+    // position.coords.latitude 纬度
+    // position.coords.longitude 经度
+    // position.coords.accuracy 精度
+    // position.coords.altitude 海拔高度
+    function showPosition(position)
+    {
+        x.innerHTML="Latitude: " + position.coords.latitude +
+                "<br />Longitude: " + position.coords.longitude;
+    }
+    
+    function showError(error)
+    {
+        switch(error.code)
+        {
+            case error.PERMISSION_DENIED:
+                x.innerHTML="User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML="Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                x.innerHTML="The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML="An unknown error occurred."
+                break;
+        }
+    }
+    getLocation();
+
+    //当然这样即使用户允许获取位置还是获取不到位置的，一般我们都是借助第三方提供的API(去比如百度地图网上找)
+</script>
+
+</body>
+</html>

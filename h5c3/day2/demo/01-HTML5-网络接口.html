@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*1.online:网络连通的时候触发这个事件*/
+    window.addEventListener("online",function(){ //网络状态改变和元素没关系，和当前页面有关，所以window
+        alert("网络连通了");
+    });
+
+    /*2.offline:网络断开时触发*/
+    window.addEventListener("offline",function(){
+        alert("网络断开了");
+    })
+</script>
+</body>
+</html>

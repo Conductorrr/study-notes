@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script src="jquery.js"></script>
+  <script>
+
+    $.ajax({
+      url: 'http://localhost/jsonp/server.php',
+      dataType: 'jsonp', //设置响应体的类型为jsonp就行
+      success: function (res) {
+        console.log(res)
+      }
+    })
+
+  </script>
+</body>
+</html>

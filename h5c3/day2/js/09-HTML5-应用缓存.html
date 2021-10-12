@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--应用缓存(也叫离线存储、离线Web应用)：
+    HTML5提供的一种新特性，创建一个cache manifest文件，用来配置需要缓存的资源的，它告知浏览器被缓存的内容
+    以及不缓存的内容；然后在html标签中增加manifest属性，属性值等于这个manifest文件的路径。然后...
+
+    在线的情况下，浏览器发现html标签中有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据
+    manifest文件配置的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用
+    离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果
+    文件改变了，那么就会重新下载文件中的资源并进行离线存储。
+    离线的情况下，浏览器就直接使用离线存储的资源
+
+    优势：
+        a)	可配置需要缓存的资源
+        b)	网络无连接应用仍可用
+        c)	本地读取缓存资源，提升访问速度，增强用户体验
+        d)	减少请求，缓解服务器负担
+
+    manifest 文件：
+        manifest 文件是简单的文本文件，它告知浏览器被缓存的内容（以及不缓存的内容）
+    Cache Manifest 基础：
+        a)	如需启用应用程序缓存，请在文档的 <html> 标签中包含 manifest 属性：
+        b)	每个指定了 manifest 的页面在用户对其访问时都会被缓存。如果未指定 manifest 属性，则页面不会被缓存（除非在 manifest 文件中直接指定了该页面）。
+        c)	manifest 文件的建议的文件扩展名是：".appcache"。这个文件的本质就是一个文本文件
+        d)	注意，manifest 文件需要配置正确的 MIME-type，即 "text/cache-manifest"。必须在 web 服务器上进行配置
+ -->
+<html lang="en" manifest="demo.appcache"> <!--manifest="应用程序缓存清单文件的路径"-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 300px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<img src="../images/l1.jpg" alt="">
+<img src="../images/l2.jpg" alt="">
+<img src="../images/l3.jpg" alt="">
+<img src="../images/l4.jpg" alt="">
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>同步模式异步模式注册事件时机问题</title>
+</head>
+<body>
+  <script>
+
+    // var xhr = new XMLHttpRequest()
+    // xhr.open('GET', 'time.php', false)
+    // xhr.send() // 等到请求响应的过程全部完成再继续
+    // console.log(xhr.readyState) //4
+    // xhr.onreadystatechange = function () {  //状态不会再变化了所以不能触发事件了
+    //   console.log(this.readyState)
+    // }
+    // 所以同步模式需要在send()前注册readystatechange事件
+
+
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', 'time.php', true)
+    xhr.send()
+    // 要注意事件注册时间问题
+    xhr.onreadystatechange = function () {
+      console.log(this.readyState)
+    }
+
+  </script>
+</body>
+</html>

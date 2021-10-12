@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪元素：::before  ::after</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            padding: 200px;
+        }
+        div:nth-of-type(1){
+            width: 300px;
+            height: 200px;
+            background-color: red;
+            float: left;
+        }
+        div:nth-of-type(2){
+            width: 100px;
+            height: 200px;
+            background-color: blue;
+            float: left;
+            position: relative;
+        }
+
+        /* 
+        E::before  在元素E的内容之前插入content属性定义的内容与样式
+        E::after   在元素E的内容之后插入content属性定义的内容与样式
+        */
+
+        div:nth-of-type(2)::before{
+            /*必须添加content属性，否则伪元素不会显示*/
+            content: "";
+            
+            /*默认是行级元素，如果想设置宽高，就必须转换为块级元素(3种方式，一般用position)*/
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            
+            background-color: #fff;
+            border-radius: 10px;
+            left: -10px;
+            top: -10px;
+        }
+        div:nth-of-type(2)::after{
+            /*必须添加content属性，否则伪元素不会显示*/
+            content: "";
+            /*默认是行级元素，如果想设置宽高，就必须转换为块级元素(3种方式，一般用position)*/
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            left: -10px;
+            bottom: -10px;
+        }
+        
+        /* 伪元素before\after的功能完全等价于一个dom元素，但它不会在dom树生成(显示网页源代码，发现dom里看不到伪元素的)
+           意味着后期不能通过js操作它。只能检查里看到 */
+    </style>
+</head>
+<body>
+<div></div>
+<div></div>
+</body>
+</html>

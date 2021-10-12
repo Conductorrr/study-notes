@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX遵循HTTP协议</title>
+</head>
+<body>
+  <script>
+
+    //AJAX遵循HTTP协议
+
+
+
+    var xhr = new XMLHttpRequest()
+
+    xhr.open('POST', '/add.php') //设置请求行（请求版本/协议不用我们写，自动设置的）
+    
+    /*如果请求体的内容是urlencoded格式的，一定要设置请求头中的Content-Type为'application/x-www-form-urlencoded',
+    告诉服务端发过来的是urlencoded格式的数据，不然服务器就当默认格式解析了，默认是text/plain格式*/
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    
+    xhr.send('key1=value1&key2=value2') // send可以传一个参数，参数可以是请求体。  以 urlencoded 格式设置请求体
+
+    //总结：AJAX发送POST请求并传了请求体时，需要根据请求体的内容格式的来设置请求头中的Content-Type，以告诉服务端发过来的是xx格式的数据，服务器按照xx格式解析数据
+
+  </script>
+</body>
+</html>

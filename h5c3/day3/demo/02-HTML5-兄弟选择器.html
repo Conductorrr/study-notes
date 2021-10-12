@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟选择器</title>
+    <style>
+		.first{
+			color: red;
+		}
+
+		/*选择.first元素后紧跟的那个li元素(如果紧跟的那个元素不是li元素就没效果)，.first和li同层（是兄弟）*/
+		.first + li{
+			color: blue;
+		}
+
+		/*选择.first元素后的所有li元素，.first和li同层（是兄弟）*/
+		.first ~ li{
+			color: pink;
+		}
+
+    </style>
+</head>
+<body>
+<ul>
+	<li>数学</li>
+	<li class="first">前端与移动开发</li>
+	<span>英语</span>
+	<li>java</li>
+	<li>javascript</li>
+	<li>c++</li>
+	<li>平面设计</li>
+</ul>
+</body>
+</html>

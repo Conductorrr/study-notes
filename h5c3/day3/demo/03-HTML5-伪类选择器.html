@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器 - 相对父元素的伪类</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            width: 700px;
+            height: 500px;
+            margin:0 auto;
+            margin-top:100px;
+            list-style: none;
+            border-left:1px solid #ccc;
+            border-top:1px solid #ccc;
+        }
+        ul > li{
+            float: left;
+            width:100px;
+            box-sizing: border-box;
+            height: 100px;
+            line-height:100px;
+            text-align: center;
+            background-color: #fff;
+            border-right:1px solid #ccc;
+            border-bottom:1px solid #ccc;
+        }
+        /* 相对于父元素的结构伪类 */
+
+
+        /* 查找li元素的父级元素中的 第一个子元素 且这个子元素得li才有效(不是li就不会选中) */
+        li:first-child{
+            color: red;
+        }
+        /* 最后一个 */
+        li:last-child{
+            background-color: skyblue;
+        }
+        /* 指定索引位置 nth-child（从1开始的索引||关键字||表达式） */
+        li:nth-child(5){
+            background-color: lightblue;
+        }
+
+        /* 偶数个元素添加背景  even:偶数  odd:奇数 */
+        /* li:nth-child(even){
+            background-color: orange;
+        }
+        li:nth-child(odd){
+            background-color: pink;
+        } */
+
+        /* 还有这种，这里n从0开始，得到的结果就是1，4，7
+        li:nth-child(3n+1) {
+        } */
+
+        
+
+        /* 查找li元素的父级元素中的 li子元素中的第一个                （在限制的类型中查找）*/
+        li:first-of-type{
+            color: red;
+        }
+        li:last-of-type{
+            color: orange;
+        }
+        li:nth-of-type(5){
+            background-color: yellow;
+        }
+
+        /* li:nth-of-type(even){
+            background-color: orange;
+        }
+        li:nth-of-type(odd){
+            background-color: pink;
+        } */
+
+        /* 想为前、后面的5个元素添加样式 */
+        /* n：默认取值范围为0~子元素的长度.但是当n<=0时，选取无效
+        0>>5
+        1>>4
+        ...
+        4>>1
+        5>>0 */
+        li:nth-of-type(-n+5){
+            font-size: 30px;
+        }
+        li:nth-last-of-type(-n+5){
+            font-size: 30px;
+        }
+
+        
+
+        /* 空值：没有任何的内容，连空格都没有 */
+        li:empty{
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+<ul>
+    <div></div>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+    <li>16</li>
+    <li>17</li>
+    <li>18</li>
+    <li>19</li>
+    <li>20</li>
+    <li>21</li>
+    <li>22</li>
+    <li>23</li>
+    <li>24</li>
+    <li>25</li>
+    <li>26</li>
+    <li>27</li>
+    <li>28</li>
+    <li>29</li>
+    <li>30</li>
+    <li>31</li>
+    <li>32</li>
+    <li>33</li>
+    <li>34</li>
+    <li>35</li>
+</ul>
+</body>
+</html>

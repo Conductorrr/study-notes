@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    <input type="file" name="file" id="imgfile" onchange="getFileContent()"><br>
+    <input type="submit" value="提交">
+</form>
+<img src="" alt="">
+<script>
+    function getFileContent() {
+        var reader = new FileReader();
+        var file = document.querySelector("#imgfile").files;
+        reader.readAsDataURL(file[0]);
+        reader.onload = function () {
+            document.querySelector("img").src = reader.result;
+        }
+    }
+</script>
+</body>
+</html>
