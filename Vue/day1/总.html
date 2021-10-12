@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+
+<body>
+
+  <div id="div"><!--V-->
+    <p>{{msg}}</p>
+    <p v-text="msg2"></p>
+    <p v-html="msg3"></p>
+    <input type="button" value="按钮" v-bind:title="mytitle+'123'">
+    <input type="button" value="按钮" :title="mytitle+'123'">
+    <input type="button" value="按钮" @click="show">
+    <p>{{msg4}}</p>
+    <input type="text" style="width: 100%" v-model="msg4">
+
+    <label>id:<input type="text" v-model="id"></label>
+    <label>name:<input type="text" v-model="name"></label>
+    <input type="button" value="添加" @click="add">
+    <p v-for="item in list" :key="item.id">
+      <input type="checkbox">{{item.id}}---{{item.name}}
+    </p>
+
+  </div>
+
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script>
+    var vm = new Vue({ //vm对象就是我们MVVM中的VM调度者
+      el: "#div",
+      data: { //M
+        msg: "啦啦啦",
+        msg2: "啦啦啦2",
+        msg3: "<h1>哈哈</h1>",
+        mytitle: '这是一个自己定义的title',
+        msg4: "呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃呃",
+        list: [{
+            id: 1,
+            name: '李斯'
+          },
+          {
+            id: 2,
+            name: '嬴政'
+          },
+          {
+            id: 3,
+            name: '赵高'
+          },
+          {
+            id: 4,
+            name: '韩非'
+          },
+          {
+            id: 5,
+            name: '荀子'
+          }
+        ],
+        id: "",
+        name: ""
+      },
+      methods: {
+        show: function () {
+          alert('Hello')
+        },
+        add() {
+          this.list.unshift({id:this.id,name:this.name})
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件之通过插槽(slot)分发内容</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script>
+        
+    //    作用域插槽
+        Vue.component("todo-list",{
+            inheritAttrs:false,
+            props:{
+                todos:[Array,Object]
+            },
+            template:
+            `<ul>
+                <li v-for="todo in todos" :key="todo.id" style="display: block;" >
+                    <slot :data="todo">{{todo.text}}</slot>
+                </li>
+             </ul>
+            `
+        });
+                
+    </script>
+    
+    <style>
+        li{
+            list-style: none;
+            display: inline-block;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        
+        <!--使用作用域插槽，通过slot-scope实现-->
+        <todo-list :todos="todos">
+            <template slot-scope="slotProps">
+                <span v-if="slotProps.data.isTrue">√</span>
+                {{slotProps.data.text}}
+            </template>
+        </todo-list>
+        
+        <!--使用ES2015结构语法-->
+        <todo-list :todos="todos">
+            <template slot-scope="{data}">
+                <span v-if="data.isTrue">√</span>
+                {{data.text}}
+            </template>
+        </todo-list>        
+    </div>
+        
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                name:"岔道口",
+                todos:[
+                    {text:"A",id:1,isTrue:true},
+                    {text:"B",id:2,isTrue:true},
+                    {text:"C",id:3,isTrue:false},
+                    {text:"D",id:4,isTrue:true},
+                ],
+                // slotProps:""
+            }
+        })
+        
+    </script>
+</body>
+</html>

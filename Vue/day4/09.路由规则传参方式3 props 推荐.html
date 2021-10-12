@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <router-link to="/login/12/ls">登录</router-link> <!--传-->
+    <router-link to="/register">注册</router-link>
+
+    <router-view></router-view>
+
+  </div>
+
+  <script>
+    var login = {
+      //这样很容易就获取路由的参数-----这种方式让组件和路由解耦，而之前的方式在组件中使用$routes,$router方法不解耦
+      template: '<h1>登录 --- {{ id }} --- {{ name }}</h1>', //直接用
+      props: ['id','name'], //写一下props
+      data() {
+        return {
+          msg: '123'
+        }
+      },
+      created() {
+        console.log(this.$route.params.id)
+        console.log(this.id)
+      }
+    }
+
+    var register = {
+      template: '<h1>注册</h1>'
+    }
+
+    var router = new VueRouter({
+      routes: [{
+          path: '/login/:id/:name', //
+          component: login,
+          props: true, //在路由匹配规则中，添加props
+        },
+        {
+          path: '/register',
+          component: register
+        }
+      ]
+    })
+
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {},
+      router
+    });
+  </script>
+</body>
+
+</html>

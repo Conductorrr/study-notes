@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <input type="text" v-model="firstname"> +
+    <input type="text" v-model="middlename"> +
+    <input type="text" v-model="lastname"> =
+    <input type="text" v-model="fullname">
+
+    <p>{{ fullname }}</p>
+    <p>{{ fullname }}</p>
+    <p>{{ fullname }}</p>
+
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        firstname: '',
+        lastname: '',
+        middlename: ''
+      },
+      methods: {},
+      computed: { // 在computed中，可以定义一些属性，这些属性叫做【计算属性】
+
+        // 注意1： 计算属性是基于它们的响应式依赖进行缓存的。
+        //        只要计算属性function内部的任何data中的数据发生了变化，就会立即重新求值。如果计算属性方法中的任何数据，都没有发生过变化，则不会重新对计算属性求值
+        //        ---为什么需要缓存？如果每次都重新计算的话，性能开销大。如果你不希望有缓存，请用方法来替代
+        // 注意2： 计算属性的本质就是一个方法，但在引用的时候，直接把它当作普通属性去使用就好了，一定不要加()去调用
+        //（一定要return一个东西、computed主要当作属性来使用、不太适合写太多的业务逻辑(methods里书写大量业务逻辑)）
+        'fullname': function () {
+          console.log('ok')
+          return this.firstname + '-' + this.middlename + '-' + this.lastname
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

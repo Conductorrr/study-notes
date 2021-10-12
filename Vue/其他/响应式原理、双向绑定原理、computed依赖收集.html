@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //遍历传入实例的data对象的属性，将其设置为Vue对象的访问器属性
+        function observe(obj, vm) {
+            Object.keys(obj).forEach(function (key) {
+                defineReactive(vm, key, obj[key]);
+            });
+        }
+        //设置为访问器属性，并在其getter和setter函数中，使用订阅发布模式。互相监听。
+        function defineReactive(obj, key, val) {
+            //这里用到了观察者(订阅/发布)模式,它定义了一种一对多的关系，让多个观察者监听一个主题对象，这个主题对象的状态发生改变时会通知所有观察者对象，观察者对象就可以更新自己的状态。
+            //实例化一个主题对象，对象中有空的观察者列表
+            var dep = new Dep();
+            //将data的每一个属性都设置为Vue对象的访问器属性，属性名和data中相同
+            //所以每次修改Vue.data的时候，都会调用下边的get和set方法。然后会监听v-model的input事件，当改变了input的值，就相应的改变Vue.data的数据，然后触发这里的set方法
+            Object.defineProperty(obj, key, {
+                //在订阅者初始化的时候，获取对应属性的值，以触发get。   get里做的就是把订阅者添加到订阅者列表中。
+                get: function () {
+                    if (是否需要添加订阅者(只有在订阅者初始化的时候才需要添加订阅者, 所以要做一个判断)) {
+                        dep.addSub(订阅者)
+                    }
+                    //Dep.target指针指向watcher，增加订阅者watcher到主体对象Dep
+                    // if (Dep.target) {
+                    //     dep.addSub(Dep.target);
+                    // }
+                    return val;
+                },
+                set: function (newVal) {
+                    if (newVal === val) {
+                        return
+                    }
+                    val = newVal;
+                    //给订阅者列表中的watchers发出通知
+                    dep.notify();
+                }
+            });
+        }
+
+        //主题对象Dep构造函数
+        function Dep() {
+            this.subs = [];
+        }
+        //Dep有两个方法，增加观察者  和  发布消息
+        Dep.prototype = {
+            addSub: function (sub) {
+                this.subs.push(sub);
+            },
+            notify: function () {
+                this.subs.forEach(function (sub) {
+                    sub.update();
+                });
+            }
+        }
+
+        /*
+        组件初始化的时候，computed 和 data 会分别建立各自的响应系统
+
+        Vue 响应系统，其核心有三点：observe、watcher、dep：
+            observe：遍历 data 中的属性，使用 Object.defineProperty 的 get/set 方法对其进行数据劫持；
+            dep：每个属性拥有自己的消息订阅器 dep，用于存放所有订阅了该属性的观察者对象；
+            watcher：观察者（对象），通过 dep 实现对响应属性的监听，监听到结果后，主动触发自己的回调进行响应。
+
+        当某个属性发生变化，触发 set 拦截函数，然后调用自身消息订阅器 dep 的 notify 方法，遍历当前 dep 中保存着
+        所有订阅者 wathcer 的 subs 数组，并逐个调用 watcher 的 update 方法，完成响应更新。
+        */
+
+
+
+        // 根据以上代码和解析，自己总结了几个面试题的答案：
+
+        /*
+        Vue双向绑定原理：
+        利用Object.defineProperty()这个方法把data中所有属性都定义为访问器属性，在get和set里使用发布者-订阅者模式，
+        每个属性都有自己的消息订阅器dep，get函数里做的就是：把所有订阅了该属性的观察者对象watcher放到消息订阅器dep的subs数组；
+        当某个属性发生变化，触发set函数，set函数里做的就是：调用自身消息订阅器dep的notify方法，来遍历所有watcher，watch调用update方法来更新自己（更新view层的代码放在set函数里）。
+        这样就可以实现data更新view了。
+        view更新data的话，通过事件监听即可，如input标签通过input事件就可以了。
+        
+        (订阅者/观察者/watcher --- 使用了data中某个数据的表单标签，发布者 --- data数据的改变）
+        (订阅者/观察者/watcher更新自己：表单元素：el.value = ….、标签中间的{{ }}：el.innerHTML = ….）
+
+
+
+        (响应式和双向绑定差不多，就这一套)
+
+        Vue 的响应式原理的核心是通过Object.defindeProperty 中的访问器属性中的 get 和 set 方法，data 中声明的属性都被添加了访问器属性，
+        当读取 data 中的数据时自动调用 get 方法，当修改 data 中的数据时，自动调用 set 方法，检测到数据的变化，会通知观察者 Wacher，
+        观察者 Wacher自动触发重新render 当前组件（子组件不会重新渲染）,生成新的虚拟 DOM 树，Vue 框架会遍历并对比新虚拟 DOM 树和
+        旧虚拟 DOM 树中每个节点的差别，并记录下来，最后，加载操作，将所有记录的不同点，局部修改到真实 DOM 树上。
+        (这段某个帖子上直接复制的)
+
+        Vue响应式原理：
+        数据发生变化后，会重新对页面渲染(视图会进行自动更新)。这就是vue响应式。完成这个过程，要
+        1 侦测数据变化 —— Object.defineProperty()
+        2 依赖收集(收集视图依赖了哪些数据)
+        为什么收集依赖？当数据变化时，可以知道那些使用了该数据的地方。
+        在getter中收集依赖。
+        3 发布订阅模式(数据变化时，自动通知需要更新的视图部分，并进行更新)
+
+        computed依赖收集：（computed的数据依赖收集过程应该和data中的数据有所区别，现在还没看懂。。。就着浅显的理解先简单总结了一下）
+        差不多就双向绑定那样讲，加一句
+        实例化一个 Dep 消息订阅器用作后续收集依赖
+        */
+
+    </script>
+</body>
+
+</html>

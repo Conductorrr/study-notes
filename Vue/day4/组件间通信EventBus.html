@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+           <com1></com1>
+           <com2></com2>
+        </div>
+    </div>
+    <script>
+        Vue.component('com1', {
+            template: `
+                        <div>
+                        <p>this is A component!</p>
+                        <input type="text" v-model="mymessage" @input="passData(mymessage)"> 
+                        </div>
+                    `,
+            data() {
+                return {
+                    mymessage: 'hello brother1'
+                }
+            },
+            methods: {
+                passData(val) {
+                    //vue实例方法$emit：触发当前实例上的事件，附加参数都会传给监听器回调
+                    this.$EventBus.$emit('globalEvent', val)
+                }
+            }
+        });
+
+        Vue.component('com2', {
+            template: `
+                        <div>
+                        <p>this is B component!</p>
+                        <p>组件A 传递过来的数据：{{brothermessage}}</p>
+                        </div>
+                    `,
+            data() {
+                return {
+                    mymessage: 'hello brother2',
+                    brothermessage: ''
+                }
+            },
+            mounted() {
+                //vue实例方法$on：监听当前实例上的自定义事件(事件可以由vm.$emit触发)，回调函数会接收所有传入事件触发函数的额外参数 
+                //(通常挂载监听在vue生命周期created和mounted当中的一个，具体使用场景需要具体的分析)
+                this.$EventBus.$on('globalEvent', (val) => {
+                    this.brothermessage = val;
+                });
+            }
+        });
+        
+        const EventBus = new Vue();//中央事件总线EventBus
+        Vue.prototype.$EventBus = EventBus;//将中央事件总线赋值到 Vue.prototype 上，这样所有组件都能访问到了
+
+        const app = new Vue({
+            el: '#app',
+        });
+
+        /*
+        中央事件总线EventBus：
+        实例化一个Vue实例EventBus，然后通过EventBus.$emit触发事件，EventBus.$on监听触发的事件。
+
+        EventBus非常简单，就是任意组件和组件之间打交道，没有多余的业务逻辑，只需要在状态变化组件触发一个事件，
+        然后在处理逻辑组件监听该事件就可以。该方法非常适合小型的项目！
+        */
+
+
+    </script>
+</body>
+
+</html>

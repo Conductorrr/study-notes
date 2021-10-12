@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+
+  <!-- props 以单向数据流的形式可以很好的完成父子组件的通信
+       单向数据流：父级prop的更新会向下流动到子组件中，而子组件并不能通过修改props中的数据修改父组件的相应状态 -->
+
+  <div id="app">
+    <!-- 1 父组件可以在引用子组件时，通过 属性绑定（v-bind:） 的形式, 向子组件传递数据，供子组件使用 -->
+    <button @click="msg='啦啦啦'">改变父组件的数据，子组件也受影响</button>
+    <com1 :parentmsg="msg"></com1>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '啊-父组件中的数据'
+      },
+      methods: {},
+      components: {
+        //（子组件中，默认无法访问到 父组件中的 data 上的数据 和 methods 中的方法）
+        com1: {
+          // 子组件中的data数据，是子组件自身私有的，比如：子组件通过Ajax，请求回来的数据，都可以放到data身上
+          // 子组件中的data数据，都是可读可写的；
+          data() { 
+            return {
+              title: '123',
+              content: 'qqq'
+            }
+          },
+          // 3 使用
+          template: '<h1 @click="change">这是子组件 --- {{ parentmsg }}</h1>',
+          // 子组件中props中的数据，都是通过父组件传递给子组件的
+          // 子组件中props中的数据，都是只读的，无法重新赋值！（如果在子组件中修改props中的数据，控制台会发出警告。）
+          props: ['parentmsg'], // 2 把父组件传递过来的parentmsg属性，先在props数组中定义一下，才能使用这个数据
+                                // 字符串数组类型的props，还有对象类型的props。可以对props进行验证。-----具体看文档
+          directives: {},
+          filters: {},
+          components: {},
+          methods: {
+            change() {
+              this.parentmsg = '被修改了'
+            }
+          }
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>

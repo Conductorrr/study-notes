@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <router-link to="/login/12/ls">登录</router-link> <!--传-->
+    <router-link to="/register">注册</router-link>
+
+    <router-view></router-view>
+
+  </div>
+
+  <script>
+
+    var login = {
+      
+      template: '<h1>登录 --- {{ $route.params.id }} --- {{ $route.params.name }}</h1>',// 通过params获取
+      data(){
+        return {
+          msg: '123'
+        }
+      },
+      created(){
+        console.log(this.$route.params.id)
+      }
+    }
+
+    var register = {
+      template: '<h1>注册</h1>'
+    }
+
+    var router = new VueRouter({
+      routes: [
+        { path: '/login/:id/:name', component: login }, //（这种是“路径参数”，都会设置到params中）
+        { path: '/register', component: register }
+      ]
+    })
+
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {},
+      router
+    });
+  </script>
+</body>
+
+</html>

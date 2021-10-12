@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <navigation-link>
+            <template slot-scope="slotProps">
+                {{ slotProps.user.firstName }}
+            </template>
+        </navigation-link>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <strong>Error!</strong>
+            <slot v-bind:user="user">
+                {{ user.lastname }}
+            </slot>
+        </div>
+    </template>
+
+    <script>
+        Vue.component('navigation-link', {
+            data() {
+                return {
+                    user: {
+                        firstname: 'zhu',
+                        lastname: 'lili'
+                    }
+                }
+            },
+            props: ['user'],
+            template: '#tmpl'
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
