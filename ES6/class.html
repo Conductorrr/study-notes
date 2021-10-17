@@ -55,9 +55,9 @@
     /*
     通过class关键字定义类
 
+    一个类必须有constructor方法（如果没有显式定义，默认添加一个空的constructor方法）
     constructor构造方法，对应ES5的构造函数Point
     constructor方法是类的默认方法，通过new创建实例对象时自动调用该方法，（默认）返回实例对象（即this，this就代表实例对象）
-    一个类必须有constructor方法（如果没有显式定义，默认添加一个空的constructor方法）
     
     实例的属性除非显式定义在其本身（即定义在this上），否则都是定义在原型上（即定义在class上）
     类的所有方法都定义在类的prototype属性上面
