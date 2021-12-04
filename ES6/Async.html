@@ -13,25 +13,41 @@
         /*
         async函数返回Promise对象，可以用then方法指定下一步的操作
         只有async函数内的所有异步操作都执行完，返回的Promise对象的状态才会改变，才会执行then方法指定的回调函数，除非遇到return语句或者抛出错误
-        async函数内部return语句返回的值，会成为then方法回调函数的参数
-        async函数内部抛出的错误对象会被catch方法回调函数接收到
+        async函数内部return语句返回的值(即便return false)，会成为then方法回调函数的参数
+        async函数内部抛出错误，会导致返回的Promise对象变为reject状态。抛出的错误对象会被catch方法回调函数、或者then第二个参数接收到
 
         await后面可以是Promise对象、原始类型的值（符串，布尔值，数值）、普通函数
             1.await后面是Promise对象，会将async函数阻塞，等待Promise对象执行完（等待Promise对象变resolve状态，得到resolve的值作为await表达式的运算结果），然后继续执行主函数接下来的代码
               ----利用这个特性就能很轻松的解决异步编程及流程管理问题！！！
-              如果await后面的Promise对象变为reject状态，则reject的参数会被catch方法的回调函数接收到，并且整个async函数都会中断执行（后面的语句不会执行了）
+              如果await后面的Promise对象变为reject状态，async函数中断（后面的语句不会执行），reject的参数会被async函数的catch方法回调函数、或者then第二个参数接收到
               (await后面的异步操作出错，等同于async函数返回的Promise对象被reject)
             2.await后面是非Promise对象，就直接把对应的值作为await表达式的结果或者执行函数，而不是等待其执行结果 
         */
 
-        //async函数内部return语句返回的值，会成为then方法回调函数的参数
+        // (中断async函数的执行：reuturn，throw；以及：有一个await后的Promise变reject)
+
+
+
+        // async函数内部return语句返回的值，会成为then方法回调函数的参数
         async function f() {
             return 'hello world'; //如果return一个直接量，async会把这个直接量通过Promise.resolve()封装成Promise对象。
         }
-        f().then(v => console.log(v))
-        // "hello world"
+        f().then(v => console.log(v))// "hello world"
 
-        //Promise对象如果变为reject状态
+
+
+        // async函数内部抛出错误，会导致返回的Promise对象变为reject状态。抛出的错误对象会被catch方法回调函数、或者then第二个参数接收到
+        async function f() {
+            throw new Error('出错了');
+        }
+        f().then(
+            v => console.log(v),
+            e => console.log(e)
+        )
+
+
+
+        //如果await后面的Promise对象变为reject状态，async函数中断（后面的语句不会执行）
         function testAwait() {
             return Promise.reject("error");
         }
@@ -65,10 +81,17 @@
             return Promise.reject("error");
         }
         async function helloAsync2() {
-            await testAwait2().catch(e => console.log("this error:" + e)) //this error:error
+            await testAwait2(
+
+            )
+            .catch(e => {
+                console.log("this error:" + e) //this error:error
+            })
             console.log("helloAsync2"); //helloAsync2
         }
         helloAsync2().then(v => {})
+
+
 
         //await后面是普通函数
         function testAwait3() {
@@ -85,8 +108,10 @@
         //testAwait3
         //注意这个输出顺序，await后面不是Promise对象就不会阻塞了
 
+
+
         // 用一个变量等于await+函数，那这个变量结果是什么？ 
-        // 答：试验下来，普通函数，变量结果为undefined。返回promise对象的函数，变量结果为resolve的值
+        // 答：试验下来，普通函数(不管有没有return)，变量结果为undefined。返回Promise对象的函数，变量结果为resolve的值；如果Promise reject了res就是undefined。
         
     </script>
 </body>
