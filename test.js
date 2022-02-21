@@ -1,8 +1,2 @@
-async function f() {
-    throw new Error('出错了');
-    console.log('sss')
-}
-f().then(
-    v => console.log('aaa',v),
-    e => console.log('bbb',e)
-)
+cardData = [1,['a','b'][3], 2,3]
+console.log(cardData.map(x => {return x }))

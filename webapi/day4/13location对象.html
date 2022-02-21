@@ -6,21 +6,22 @@
   <script>
 
     //location对象
-    //console.log(window.location);
 
     //对象中的属性和方法：
 
-    //完整的 URL
+    //完整的URL
     console.log(window.location.href);
+    //协议+域名+端口号
+    console.log(window.location.origin)
     //协议
     console.log(window.location.protocol);
-    //主机名(域名)及端口号
+    //域名+端口号
     console.log(window.location.host);
-    //主机名(域名)
+    //域名
     console.log(window.location.hostname);
     //端口号
     console.log(window.location.port);
-    //当前 URL 的路径部分
+    //路径部分
     console.log(window.location.pathname);
     //从问号 (?) 开始的 URL（查询部分）
     console.log(window.location.search);
@@ -30,7 +31,7 @@
     onload=function () {
       document.getElementById("btn").onclick=function () {
         
-        //设置跳转的页面的地址
+        //js页面跳转
         location.href="http://www.jd.com";//属性----------------->必须记住
         //location.assign("http://www.jd.com");//方法
         //location.replace("http://www.jd.com");//和上面两个不一样，没有历史记录，所以不能后退
@@ -40,7 +41,6 @@
     };
 
     
-
   </script>
 </head>
 <body>
