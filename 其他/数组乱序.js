@@ -1,5 +1,5 @@
 /*
-Fisher–Yates shuffle 洗牌算法：
+Fisher–Yates shuffle 洗牌算法 ---- 该算法保证了每个元素在每个位置的概率都是相等的，实现了真正的乱。
 先从数组末尾开始，选取最后一个元素，与数组中随机一个位置的元素交换位置，
 然后在已经排好的最后一个元素以外的位置中，随机产生一个位置，让该位置元素与倒数第二个元素进行交换。
 */
@@ -10,7 +10,7 @@ Array.prototype.shuffle = function () {
         i;
     while (len) {
         i = Math.floor((Math.random() * len--));
-        [this[len], this[i]] = [this[i], this[len]];
+        [this[len], this[i]] = [this[i], this[len]]; // 交换
     }
     return this;
 }
@@ -20,9 +20,9 @@ console.log(arr.shuffle())
 
 
 
-// 面试题：有一个长度为100的数组，如何从中随机挑选50个元素，组成一个新的数组？
+// 面试题：有一个长度为100的数组，如何从中随机挑选50个元素，组成一个新的数组？注意数字不能重复。
 
-//（法一：通过 sort + Math.random() 实现乱序）
+//（法一：sort + Math.random() ）
 function randomSort(a,b) { 
     return .5 - Math.random(); 
 }
@@ -60,7 +60,6 @@ function getShuffle(arr, count) {
 let array3 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 console.log(getShuffle(array3, 5));
 
-// (splice也实现了乱序吧？因为取随机数时length会变？)洗牌算法的性能优秀很多。
 // 用Array.form生成了一个长度为一百万的数组，然后从中随机取十万个数，使用splice的方案耗时47268，洗牌算法的方案耗时19。
 // 猜测每次循环都要splice，splice要移动删除元素后面所有的元素，而洗牌算法每次循环只要交换即可。
 // 而且法二还得用一个额外的空间，洗牌算法不需要。

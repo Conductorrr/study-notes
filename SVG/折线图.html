@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
+      <style> 
+         .line {
+            fill: none;
+            stroke: green;
+            stroke-width: 5px;
+         }
+      </style>
+   </head>
+   <body>
+      <script>
+         // SVG属性定义如下
+         var margin = {top: 20, right: 20, bottom: 30, left: 50},
+         width = 960 - margin.left - margin.right,
+         height = 500 - margin.top - margin.bottom;
+         // 为x轴和y轴创建比例线性函数，并指定域domain和范围range
+         var x = d3.scaleTime().range([0, width]); //  scaleTime构造一个线性比例
+         var y = d3.scaleLinear().range([height, 0]); // scaleLinear构造一个连续的线性标度
+         // 使用d3.line()创建新的线生成器
+         var valueline = d3.line()
+            .x(function(d) { return x(d.year); })
+            .y(function(d) { return y(d.population); });
+         // append the svg obgect to the body of the page
+         // appends a 'group' element to 'svg'
+         // moves the 'group' element to the top left margin
+         var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g").attr("transform",
+               "translate(" + margin.left + "," + margin.top + ")");
+         // Get the data
+         d3.csv("data.csv", function(error, data) {
+            if (error) throw error;
+            // 格式化数据
+            data.forEach(function(d) {
+               d.year = d.year;
+               d.population = +d.population;
+            });
+            // domain：域表示输入数据的最小值和最大值
+            x.domain(d3.extent(data, function(d) { return d.year; })); // d3.extent返回最大值和最小值
+            y.domain([0, d3.max(data, function(d) { return d.population; })]);
+            // 追加路径和数据   
+            svg.append("path")
+               .data([data])
+               .attr("class", "line")
+               .attr("d", valueline);
+            // 添加X轴
+            svg.append("g")
+               .attr("transform", "translate(0," + height + ")")
+               .call(d3.axisBottom(x)); // 创建底部水平轴
+            // Add the Y Axis
+            svg.append("g")
+               .call(d3.axisLeft(y)); // 现在我们可以用axisLeft，创建我们的x轴并将比例添加到x轴
+         });
+
+         // SVG的<path>标签用于制路径，d属性表示绘制顺序
+         // SVG 的 <path> 理论上能绘制任意二维图形，而 D3 则通过指定算法生成对应图表 <path> 的 d 属性值：
+         // 如折线图的 d3.line()、饼图的 d3.pie()、堆积图的 d3.stack() 等等。
+         // 这也为什么 D3 有这么多 API 的一大原因了。
+      </script>
+   </body>
+</html>

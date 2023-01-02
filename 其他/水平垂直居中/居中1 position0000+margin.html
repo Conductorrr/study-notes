@@ -7,6 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        /* 
+        利用绝对定位，所有方向都为0，这就像四个方向有相同的力在拉这个盒子。
+
+        为什么margin: auto能实现块元素水平居中？auto会自动分配剩余空间作为margin。
+
+        该方法必须盒子有宽高，否则就铺满父容器。 */
+
         .outer{
             height: 400px;
             width: 600px;
@@ -24,6 +31,7 @@
             left: 0;
             bottom: 0;
             right: 0;
+
             margin: auto;
 
         }

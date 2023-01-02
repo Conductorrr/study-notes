@@ -14,8 +14,8 @@
     <a href="" @click.prevent="comName='login'">登录</a>
     <a href="" @click.prevent="comName='register'">注册</a>
 
-    <!-- Vue提供了 component , -->
-    <!-- component 是一个占位符，:is 属性，来展示对应名称的组件 -->
+    <!-- component ：渲染组件 -->
+    <!-- 根据 :is 属性，决定哪个组件被渲染 -->
     <component :is="comName"></component>
 
   </div>

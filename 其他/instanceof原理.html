@@ -30,17 +30,22 @@
         console.log(stu instanceof Object); // true
 
 
-        function instance_of(L, R) { // L即stu ；  R即Person        
-            var O = R.prototype; // O为Person.prototype     
+
+        function instance_of(L, R) { // L即stu ；  R即Person   
+            if (typeof L !== "object" || L === null) 
+                return false
+            if (typeof R !== "function") 
+                throw new TypeError("origin must be function");   
+
             L = L.__proto__; // L为stu._proto_
             while (true) { // 执行循环
-                if (L === null) // 不通过                            
+                if (L === null) // 不通过（原型最终指向null）              
                     return false;
-                if (O === L) // 判断：Person.prototype === stu._proto_   
+                if (L === R.prototype) // 判断：stu._proto_ === Person.prototype
                     return true; 
-                L = L.__proto__; // 继承用    令L=  stu._proto_._proto_，指的就是Person.prototype，所以也返回true
+                L = L.__proto__; // 继承用    令L = stu._proto_._proto_  指的就是Person.prototype，所以也返回true
             } 
-        } 
+        }
 
         console.log(instance_of(stu,Student))// true
         console.log(instance_of(stu,Person))// true

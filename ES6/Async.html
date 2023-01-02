@@ -12,12 +12,12 @@
     <script>
         /*
         async函数返回Promise对象，可以用then方法指定下一步的操作
-        只有async函数内的所有异步操作都执行完，返回的Promise对象的状态才会改变，才会执行then方法指定的回调函数，除非遇到return语句或者抛出错误
         async函数内部return语句返回的值(即便return false)，会成为then方法回调函数的参数
+        只有async函数内的所有异步操作都执行完，返回的Promise对象的状态才会改变，才会执行then方法指定的回调函数，除非遇到return语句或者抛出错误（不是异步操作一完成就去执行then方法指定的回调函数，感觉意思就是async函数内的所有操作都执行完，再。。。差不多就到return了）
         async函数内部抛出错误，会导致返回的Promise对象变为reject状态。抛出的错误对象会被catch方法回调函数、或者then第二个参数接收到
 
         await后面可以是Promise对象、原始类型的值（符串，布尔值，数值）、普通函数
-            1.await后面是Promise对象，会将async函数阻塞，等待Promise对象执行完（等待Promise对象变resolve状态，得到resolve的值作为await表达式的运算结果），然后继续执行主函数接下来的代码
+            1.await后面是Promise对象，会将async函数阻塞，等待Promise对象执行完，即等待Promise对象变resolve状态，得到resolve的值作为await表达式的运算结果
               ----利用这个特性就能很轻松的解决异步编程及流程管理问题！！！
               如果await后面的Promise对象变为reject状态，async函数中断（后面的语句不会执行），reject的参数会被async函数的catch方法回调函数、或者then第二个参数接收到
               (await后面的异步操作出错，等同于async函数返回的Promise对象被reject)

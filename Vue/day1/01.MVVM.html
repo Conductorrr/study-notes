@@ -11,7 +11,7 @@
 
 <body>
 
-  <div id="div"><!--V-->
+  <div id="div"><!-- Vue实例所控制的这个元素区域，就是 V  -->
     <p>{{msg}}</p>
     <p v-text="msg2"></p>
     <p v-html="msg3"></p>
@@ -32,9 +32,9 @@
 
   <script src="./lib/vue-2.4.0.js"></script>
   <script>
-    var vm = new Vue({ //vm对象就是我们MVVM中的VM调度者
+    var vm = new Vue({ // Vue实例就是我们MVVM中的 VM调度者
       el: "#div",
-      data: { //M
+      data: { // data 就是MVVM中的 M
         msg: "啦啦啦",
         msg2: "啦啦啦2",
         msg3: "<h1>哈哈</h1>",

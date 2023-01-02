@@ -16,7 +16,7 @@
 
     /*
      *
-     * 函数中的this的指向：
+     * 函数中的this的指向：总：this指的是函数运行时所在的环境-----为什么是这样？和内存的数据结构有关，函数单独保存在内存中，然后再将函数的地址赋值给foo属性的value属性，所以它可以在不同的环境执行。
      *
      *
      * 普通函数简单调用 this是谁?-----window
@@ -53,21 +53,20 @@
     //  },1000);
 
     //构造函数
-    //    function Person() {
-    //      console.log(this);
-    //对象的方法
-    //      this.sayHi=function () {
-    //        console.log(this);
-    //      };
-    //    }
+      //  function Person() {
+      //    console.log(this);
+      //    this.sayHi=function () {
+      //      console.log(this);
+      //    };
+      //  }
     //原型中的方法
-    //    Person.prototype.eat=function () {
-    //      console.log(this);
-    //    };
-    //    var per=new Person();
-    //    console.log(per);
-    //    per.sayHi();
-    //    per.eat();
+      //  Person.prototype.eat=function () {
+      //    console.log(this);
+      //  };
+      //  var per=new Person();
+      //  console.log(per);
+      //  per.sayHi();
+      //  per.eat();
 
 
     //BOM:中顶级对象是window,浏览器中所有的东西都是window的

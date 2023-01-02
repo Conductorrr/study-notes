@@ -8,12 +8,12 @@
 			color: red;
 		}
 
-		/*选择.first元素后紧跟的那个li元素(如果紧跟的那个元素不是li元素就没效果)，.first和li同层（是兄弟）*/
+		/*相邻兄弟选择器：选择.first元素后紧跟的那个li元素(如果紧跟的那个元素不是li元素就没效果)，.first和li同层（是兄弟）*/
 		.first + li{
 			color: blue;
 		}
 
-		/*选择.first元素后的所有li元素，.first和li同层（是兄弟）*/
+		/*通用兄弟选择器：选择.first元素后的所有li元素，.first和li同层（是兄弟）*/
 		.first ~ li{
 			color: pink;
 		}

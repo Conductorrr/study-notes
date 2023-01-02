@@ -63,10 +63,10 @@ JS引擎对脚本静态分析的时候，碰到模块加载命令import，只会
 
 /*
 ES6 Module与CommonJS的差异：
-1.Module输出的值 是一个实时的值，会随模块内部的变化而动态更新(因为，，，原理）
+1.ES6 Module输出的值 是一个实时的值，会随模块内部的变化而动态更新(因为，，，原理）
   CommonJS输出的值 不会(随模块内部的变化而)变化，一直用第一次require的结果(因为，，，原理），
-2.Module是编译时输出接口（ES6模块它的对外接口只是一种静态定义，不是对象，在代码静态解析阶段就会生成）
+2.ES6 Module是编译时输出接口（ES6模块它的对外接口只是一种静态定义，不是对象，在代码静态解析阶段就会生成）
   CommonJS是执行时加载（执行时输出接口，因CommonJS加载的是一个对象，该对象只有在脚本执行完才会生成）
-3.Module顶层的this指向undefined，CommonJS顶层的this指向当前模块
-4.Module静态语法只能写在顶层（不能在块极作用域中），CommonJs是动态语法可以写在判断里，
+3.ES6 Module顶层的this指向undefined，CommonJS顶层的this指向当前模块
+4.ES6 Module静态语法只能写在顶层（不能在块极作用域中），CommonJs是动态语法可以写在判断里，
 */

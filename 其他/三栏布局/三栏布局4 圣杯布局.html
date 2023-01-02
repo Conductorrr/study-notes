@@ -8,45 +8,42 @@
     <title>Document</title>
     <style>
         /*圣杯布局法*/
-        .left,
-        .main,
-        .right {
-            min-height: 130px;
+        #container {
+            padding-left: 200px;
+            padding-right: 150px;
+        }
+        #container p {
             float: left;
-            position: relative;
         }
-
-        .left {
-            background: green;
-            width: 200px;
-            margin-left: -100%;
-            left: -200px;
-        }
-
-        .main {
-            background-color: blue;
+        .center {
             width: 100%;
+            background-color: lightcoral;
         }
-
+        .left {
+            width: 200px;
+            position: relative;
+            left: -200px;
+            margin-left: -100%; /* 100%：需要一整行的宽度补偿margin，刚好和middle中间栏的左侧对齐 */
+            background-color: lightcyan;
+        }
         .right {
-            background-color: red;
-            width: 300px;
-            margin-left: -300px;
-            right: -300px;
+            width: 150px;
+            margin-right: -150px;  /* 你要是给一个-150px，和他宽度一样，那他占据的空间就是0，会跑到上一行去。然后在上面重新执行你的那句margin */
+            background-color: lightgreen;
         }
-
-        .container {
-            padding: 0 300px 0 200px;
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
         }
     </style>
 </head>
 
 <body>
-    左右栏固定中间栏边框自适应
-    <div class="container">
-        　　<div class="main">main</div>
-        　　<div class="left">left</div>
-        　　<div class="right">right</div>
+    <div id="container" class="clearfix">
+        <p class="center">我是中间</p>
+        <p class="left">我是左边</p>
+        <p class="right">我是右边</p>
     </div>
 </body>
 

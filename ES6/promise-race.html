@@ -44,7 +44,7 @@
         }
 
         /*
-        Promise.race 谁快，以谁为准执行回调  剩下的2个promise也仍会执行不会就此中断
+        Promise.race 哪个实例率先改变状态，p的状态就跟着改变。剩下的2个promise也仍会执行不会就此中断
         */
         var p = Promise.race([runAsync1(),runAsync2(),runAsync3()]);
         p.then(function (results) {

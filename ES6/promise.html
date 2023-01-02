@@ -34,7 +34,8 @@
     promise对象有三种状态：pending进行中，fulfilled已完成，rejected已失败。
 
     若调用了两次resolve方法会怎么样？
-    状态一旦改变，就不会再变，任何时候都可以得到这个结果。所以第二次调用resolve没什么用，也会立即得到这个结果，
+    状态一旦改变，就不会再变，任何时候都可以得到这个结果。所以第二次调用resolve没什么用，也会立即得到这个结果
+    (第二次调用resolve相当于没有任何用处，也不会再触发then的第一个回掉函数)
     */
 
 
@@ -49,7 +50,7 @@
     一般来说，调用resolve或reject以后，Promise 的使命就完成了，后继操作应该放到then方法里面，
     而不应该直接写在resolve或reject的后面。所以，最好在它们前面加上return语句，这样就不会有意外。
     */
-    
+
     </script>
 </body>
 </html>

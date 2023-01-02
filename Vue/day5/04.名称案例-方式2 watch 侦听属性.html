@@ -27,7 +27,7 @@
         fullname: ''
       },
       methods: {},
-      watch: { // 侦听属性，可以监视data中指定数据的变化，然后触发对应的function处理函数
+      watch: { // 侦听属性，可以监视data中数据的变化，然后触发对应的函数
         'firstname': function (newVal, oldVal) {
           this.fullname = newVal + '-' + this.lastname
         },
@@ -39,14 +39,12 @@
 
     /*
     上面代码是重复的，改用computed会好很多
-    在这个例子，或大多数情况下，用computed更合适，但也有些情况用watch更合适。
 
     computed和watch的差异：
     1 computed 是计算一个新的属性，并将该属性挂载到 vm（Vue 实例）上，而 watch 是监听已经存在且已挂载到 vm 上的数据，
       所以用 watch 同样可以监听 computed 计算属性的变化（其它还有 data、props）
     2 computed 本质是一个惰性求值的观察者，具有缓存性，只有当依赖变化后，第一次访问  computed  属性，才会计算新的值，
       而 watch 则是当数据发生变化便会调用执行函数
-    3 从使用场景上说，computed 适用一个数据被多个数据影响，而 watch 适用一个数据影响多个数据；
     */
     
   </script>

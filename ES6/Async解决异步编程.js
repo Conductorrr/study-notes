@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <script>
         //实现肚包鸡的制作过程
 
         //准备
@@ -74,8 +63,3 @@
         2.利用await阻塞原理，实现每个制作的顺序执行
         相比较Generator实现，无需自己实现自动执行器，完美的实现了异步流程
         */
-
-    </script>
-</body>
-
-</html>

@@ -20,17 +20,11 @@
 
     var xhr = new XMLHttpRequest()
 
-    //如果需要捕获第1个状态的变化，需要注意代码执行顺序的问题（不要出现来不及的情况）
-    // xhr.onreadystatechange = function () {
-    //   // 这个事件并不是只在响应时触发，而是XHR状态改变就触发
-    //   console.log(this.readyState)
-    // }
-
     xhr.open('GET', './time.php')
 
     xhr.send()
     
-    xhr.onreadystatechange = function () {// 这个事件并不是只在响应时触发，而是XHR状态改变就触发
+    xhr.onreadystatechange = function () {// XHR状态改变就触发
       if (this.readyState !== 4) return
       console.log(this.responseText)// 获取响应体
     }
@@ -39,7 +33,7 @@
     /*
      Ajax的请求过程：
     （1）创建 XMLHttpRequest 对象，也就是创建一个异步调用对象；
-    （2）调用open方法，并指定该 HTTP 请求的方式、 URL 以及验证信息，（以）创建一个新的 HTTP 请求（与服务器端口建立连接）
+    （2）调用open方法，并指定该 HTTP 请求的方式、 URL 以及验证信息，与服务器端口建立连接
     （3）设置响应 HTTP 请求状态变化的函数；
     （4）发送 HTTP 请求；
     （5）获取异步调用返回的数据；

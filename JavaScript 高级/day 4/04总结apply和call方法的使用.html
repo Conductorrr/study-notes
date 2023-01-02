@@ -21,42 +21,50 @@
 
 
     //函数的调用,改变this的指向
-      //  function f1(x,y) {
-      //    console.log((x+y)+":===>"+this);
-      //    return "这是函数的返回值";
-      //  }
-      //  //apply和call调用
-      //  var r1=f1.apply(null,[1,2]);//此时f1中的this是window
-      //  console.log(r1);
-      //  var r2=f1.call(null,1,2);//此时f1中的this是window
-      //  console.log(r2);
-      //  console.log("==================>");
-      //  //改变this的指向
-      //  var obj={
-      //    sex:"男"
-      //  };
-      //  //本来f1函数是window对象的,但是传入obj之后,f1函数此时就是obj对象的
-      //  var r3=f1.apply(obj,[1,2]);//此时f1中的this是obj
-      //  console.log(r3);
-      //  var r4=f1.call(obj,1,2);//此时f1中的this是obj
-      //  console.log(r4);
+    //  function f1(x,y) {
+    //    console.log((x+y)+":===>"+this);
+    //    return "这是函数的返回值";
+    //  }
+    //  //apply和call调用
+    //  var r1=f1.apply(null,[1,2]);//此时f1中的this是window
+    //  console.log(r1);
+    //  var r2=f1.call(null,1,2);//此时f1中的this是window
+    //  console.log(r2);
+    //  console.log("==================>");
+    //  //改变this的指向
+    //  var obj={
+    //    sex:"男"
+    //  };
+    //  //本来f1函数是window对象的,但是传入obj之后,f1函数此时就是obj对象的
+    //  var r3=f1.apply(obj,[1,2]);//此时f1中的this是obj
+    //  console.log(r3);
+    //  var r4=f1.call(obj,1,2);//此时f1中的this是obj
+    //  console.log(r4);
 
 
-//方法,改变this的指向
-  //  function Person(age) {
-  //    this.age = age;
-  //  }
-  //  Person.prototype.sayHi = function (x, y) {
-  //    console.log((x + y) + ":====>" + this.age);//是实例对象
-  //  };
-  //  function Student(age) {
-  //    this.age = age;
-  //  }
-  //  var per = new Person(10);//实例对象
-  //  var stu = new Student(100);//实例对象
-  //  //sayHi方法是per实例对象的
-  //  per.sayHi.apply(stu, [10, 20]);
-  //  per.sayHi.call(stu, 10, 20);
+    //方法,改变this的指向
+    function Person(age,sex) {
+      this.age=age;
+      this.sex=sex;
+    }
+    Person.prototype.sayHi=function (x,y) {
+      console.log("您好啊:"+this.sex);
+      return 1000;
+    };
+    var per=new Person(10,"男");
+    per.sayHi(); //您好啊:男
+
+    console.log("==============");
+    function Student(name,sex) {
+      this.name=name;
+      this.sex=sex;
+    }
+    var stu=new Student("小明","人妖");
+    var r1=per.sayHi.apply(stu,[10,20]); //您好啊:人妖
+    var r2=per.sayHi.call(stu,10,20); //您好啊:人妖
+
+    console.log(r1); // 1000
+    console.log(r2); // 1000
 
 
 
@@ -88,7 +96,14 @@
     per.eat();
     console.dir(per);
     console.dir(Person)
-    //实例对象调用方法,方法要么在实例对象中存在,要么在原型对象中存在
+    //(实例对象调用方法,方法要么在实例对象中存在,要么在原型对象中存在)
+
+
+
+
+    //apply和call方法中如果没有传入参数,或者是传入的是null,那么调用该方法的函数对象中的this就是默认的window
+
+
 
 
   </script>

@@ -32,7 +32,9 @@
     // console.log(stu2.name,stu2.age,stu2.sex,stu2.weight,stu2.score);
     // stu2.sayHi();
 
-    // 原型链实现继承的问题：1、直接初始化了属性，继承过来的属性的值都是一样的了         （问题2、见书）
+    // 原型链实现继承的问题：
+    // SubType 的所有实例都会共享这一个 colors 属性。而我们对 instance1.colors 的修改 能够通过 instance2.colors 反映出来
+    // 在创建子类型的实例时，不能向超类型的构造函数中传递参数
     // 只能重新调用对象的属性进行重新赋值（很麻烦，所以👇）        
 
 

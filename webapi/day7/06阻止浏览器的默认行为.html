@@ -11,14 +11,14 @@
 <script>
   my$("ak").onclick=function (e) {
     alert("被点了");
-    //阻止浏览器的默认行为的3种方法：
+    //阻止事件的默认行为的3种方法：
     return false;
     //e.preventDefault();
     //window.event.preventDefault();//ie8没有这个方法
 
-    //浏览器的默认行为：点击一个<a>元素,页面会跳转到该元素href属性指定的页；点击一个button表单提交，可以用return false阻止表单提交
+    //事件的默认行为：点击一个<a>元素,页面会跳转到该元素href属性指定的页；点击一个button表单提交，可以用return false阻止表单提交
     
-    //当然以后a标签里写javascipt:;就不会页面跳转了，不需要再写return false;
+    //a标签里写javascipt:;就不会页面跳转了，不需要再写return false;
   };
 </script>
 </body>

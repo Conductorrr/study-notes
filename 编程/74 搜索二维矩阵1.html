@@ -17,8 +17,8 @@
         ]
         var searchMatrix = function (matrix, target) {
             //二分查找
-            var m = matrix.length;
-            var n = (matrix[0] || []).length;
+            var m = matrix.length; // m行
+            var n = (matrix[0] || []).length; // n列
             var low = 0;
             var high = m * n - 1;
             while (low <= high) {

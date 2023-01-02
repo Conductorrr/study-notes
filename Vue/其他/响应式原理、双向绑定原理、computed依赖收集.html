@@ -15,14 +15,14 @@
                 defineReactive(vm, key, obj[key]);
             });
         }
-        //设置为访问器属性，并在其getter和setter函数中，使用订阅发布模式。互相监听。
-        function defineReactive(obj, key, val) {
+        //把每一个属性都设置为访问器属性，并在其getter和setter函数中，使用订阅发布模式。互相监听。
+        function defineReactive(vm, key, val) {
             //这里用到了观察者(订阅/发布)模式,它定义了一种一对多的关系，让多个观察者监听一个主题对象，这个主题对象的状态发生改变时会通知所有观察者对象，观察者对象就可以更新自己的状态。
             //实例化一个主题对象，对象中有空的观察者列表
             var dep = new Dep();
             //将data的每一个属性都设置为Vue对象的访问器属性，属性名和data中相同
             //所以每次修改Vue.data的时候，都会调用下边的get和set方法。然后会监听v-model的input事件，当改变了input的值，就相应的改变Vue.data的数据，然后触发这里的set方法
-            Object.defineProperty(obj, key, {
+            Object.defineProperty(vm, key, {
                 //在订阅者初始化的时候，获取对应属性的值，以触发get。   get里做的就是把订阅者添加到订阅者列表中。
                 get: function () {
                     if (是否需要添加订阅者(只有在订阅者初始化的时候才需要添加订阅者, 所以要做一个判断)) {
@@ -64,8 +64,8 @@
         /*
         组件初始化的时候，computed 和 data 会分别建立各自的响应系统
 
-        Vue 响应系统，其核心有三点：observe、watcher、dep：
-            observe：遍历 data 中的属性，使用 Object.defineProperty 的 get/set 方法对其进行数据劫持；
+        Vue 响应系统，其核心有三点：
+            observe：遍历 data 中的属性，使用 Object.defineProperty 的 get/set 方法对属性进行数据劫持；
             dep：每个属性拥有自己的消息订阅器 dep，用于存放所有订阅了该属性的观察者对象；
             watcher：观察者（对象），通过 dep 实现对响应属性的监听，监听到结果后，主动触发自己的回调进行响应。
 
@@ -80,23 +80,15 @@
         /*
         Vue双向绑定原理：
         利用Object.defineProperty()这个方法把data中所有属性都定义为访问器属性，在get和set里使用发布者-订阅者模式，
-        每个属性都有自己的消息订阅器dep，get函数里做的就是：把所有订阅了该属性的观察者对象watcher放到消息订阅器dep的subs数组；
-        当某个属性发生变化，触发set函数，set函数里做的就是：调用自身消息订阅器dep的notify方法，来遍历所有watcher，watch调用update方法来更新自己（更新view层的代码放在set函数里）。
+        每个属性都有自己的消息订阅器dep。读取属性（当页面使用对应属性时）会触发get函数：把所有订阅了该属性的观察者对象watcher放到消息订阅器dep的subs数组；
+        当某个属性发生变化，触发set函数：调用自身消息订阅器dep的notify方法，来遍历所有watcher，watch调用update方法来更新自己（更新view层的代码放在set函数里）。
         这样就可以实现data更新view了。
         view更新data的话，通过事件监听即可，如input标签通过input事件就可以了。
         
-        (订阅者/观察者/watcher --- 使用了data中某个数据的表单标签，发布者 --- data数据的改变）
-        (订阅者/观察者/watcher更新自己：表单元素：el.value = ….、标签中间的{{ }}：el.innerHTML = ….）
-
-
+        (订阅者/观察者/watcher --- 使用了data中某个数据的表单标签。发布者 --- data数据的改变）
+        (订阅者/观察者/watcher更新自己：表单元素：el.value = xxx、标签中间的{{ }}：el.innerHTML = xxx.）
 
         (响应式和双向绑定差不多，就这一套)
-
-        Vue 的响应式原理的核心是通过Object.defindeProperty 中的访问器属性中的 get 和 set 方法，data 中声明的属性都被添加了访问器属性，
-        当读取 data 中的数据时自动调用 get 方法，当修改 data 中的数据时，自动调用 set 方法，检测到数据的变化，会通知观察者 Wacher，
-        观察者 Wacher自动触发重新render 当前组件（子组件不会重新渲染）,生成新的虚拟 DOM 树，Vue 框架会遍历并对比新虚拟 DOM 树和
-        旧虚拟 DOM 树中每个节点的差别，并记录下来，最后，加载操作，将所有记录的不同点，局部修改到真实 DOM 树上。
-        (这段某个帖子上直接复制的)
 
         Vue响应式原理：
         数据发生变化后，会重新对页面渲染(视图会进行自动更新)。这就是vue响应式。完成这个过程，要
@@ -109,6 +101,33 @@
         computed依赖收集：（computed的数据依赖收集过程应该和data中的数据有所区别，现在还没看懂。。。就着浅显的理解先简单总结了一下）
         差不多就双向绑定那样讲，加一句
         实例化一个 Dep 消息订阅器用作后续收集依赖
+
+
+
+
+        1、Object.defineProperty 缺点？
+        对象新增或者删除的属性无法被 set 监听到、无法触发视图更新，只有对象本身存在的属性修改才会被劫持
+
+        2、这样的数据劫持方式对数组有什么影响？Vue如何检测数组变化？数组的观测原理？
+        ( 如果 data 包含数组比如 a:[1,2,3,4,5] 那么我们根据下标可以直接修改数据也能触发 set 但是如果一个数组里面有上千上万个元素，
+        每一个元素下标都添加 get 和 set 方法 这样对于性能来说是承担不起的 所以此方法只用来劫持对象 )
+
+        数组考虑性能没有用 defineProperty 对数组的每一项进行拦截，所以通过index或者length属性去操作数组，是监控不到的
+        需要用数组的方法操作数组，7种：push,shift,pop,splice,unshift,sort,reverse。才会触发数组对应的 watcher 进行更新（才能触发视图的更新）
+            this.arr.length = 3不是响应式的
+            this.arr[2]='x' 不是响应式的 => this.$set(this.arr, 2, 'x') 是响应式的
+
+        ⬇️
+
+        了解 Vue 响应式原理的同学都知道在两种情况下修改数据 Vue 是不会触发视图更新的
+        1.在实例创建之后添加、删除属性（给响应式对象新增属性）
+        2.通过index或者length属性来修改数组的值
+        可以使用this.$set()来进行强制更新，进而解决问题
+
+        $set 原理如下：
+        将新属性定义成响应式的，再通知视图更新
+        当修改数组索引时我们调用数组本身的 splice 方法去更新数组
+        
         */
 
     </script>
